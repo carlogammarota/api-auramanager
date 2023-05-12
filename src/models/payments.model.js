@@ -7,7 +7,13 @@ module.exports = function (app) {
   const mongooseClient = app.get('mongooseClient');
   const { Schema } = mongooseClient;
   const schema = new Schema({
-    text: { type: String, required: true }
+    text: { type: String, required: false },
+    id_comprador: { type: String, required: false },
+    id_vendedor: { type: String, required: false },
+    productos: { type: Array, required: false },
+    linkDePago: { type: String, required: false },
+    estado: { type: String, required: false },
+    external_reference: { type: String, required: false }
   }, {
     timestamps: true
   });
