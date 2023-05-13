@@ -48,29 +48,40 @@ module.exports = (options = {}) => {
 
       
       
-      console.log("merchant_order", merchant_order)
+      console.log('merchant_order', merchant_order);
     
       let payments = merchant_order.response.payments;
 
-      console.log("payments", payments)
+      console.log('payments', payments.id);
+
+      let paymentId = payments.id;
+      let generarEntrega = false;
 
       for (let index = 0; index < payments.length; index++) {
         const payment = payments[index];
+        
         // if(payment.status == 'approved' && payment.status_detail == 'accredited' && totalCompra == totalPadreCompra && merchant_order.response.status == 'closed' && merchant_order.response.payments[index].status == 'approved' && merchant_order.response.payments[index].status_detail == 'accredited' && merchant_order.response.external_reference == external_reference_variable){
         if(payment.status == 'approved' && payment.status_detail == 'accredited'){
           console.log('El pago fue exitoso, HOLAAA!!!');
+
+
+          if(generarEntrega == false && paymentId == payment.id){
+            let entrada = await context.app.service('entradas').create({
+              dni: null,
+              estado: 'no-ingreso',
+              consumision: true
+            });
+            console.log('entrada', entrada);
+            generarEntrega = true;
+          }
+
+
+
           //aca es la logica de cuando la persona ya pago y todo salio bien
 
           //aca se debe descargar el pdf con la entrada
           
-          //crear servicio generar entrada y que devuelva el id de la entrada
-          let entrada = await context.app.service('entradas').create({
-            dni: null,
-            estado: 'no-ingreso',
-            consumision: true
-          });
 
-          console.log('entrada', entrada);
           
 
 
@@ -104,16 +115,37 @@ module.exports = (options = {}) => {
               estado: 'aprobado',
             });
 
+        
+
+            //hacer un if que pase una vez sola y no cada vez que se actualice el estado del pago solo si el estado es aprobado
+            
+
+
+
+            //si el estado es aprobado, se debe crear una entrada para el usuario y guardarla en la base de datos
+
+            // let estadoPago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
+
+
+            //crear servicio generar entrada y que devuelva el id de la entrada
+            // let entrada = await context.app.service('entradas').create({
+            //   dni: null,
+            //   estado: 'no-ingreso',
+            //   consumision: true
+            // });
+
+            console.log('entrada', entrada);
+
             
 
 
 
             let getPayment = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
             console.log('getPayment', getPayment.id_comprador);
-             //hacer un patch a la api que actualize la cuenta a premium
+            //hacer un patch a la api que actualize la cuenta a premium
             let premium = await context.app.service('users').patch( getPayment.id_comprador,{
               premium: true
-            })
+            });
 
 
             // console.log('paymentNew', paymentNew);

@@ -1,5 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
+const generarEntrada = require('../../hooks/generar-entrada');
+
 module.exports = {
   before: {
     // all: [ authenticate('jwt') ],
@@ -25,7 +27,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [generarEntrada()],
     update: [],
     patch: [],
     remove: []
