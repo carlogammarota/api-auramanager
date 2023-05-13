@@ -9,7 +9,7 @@ module.exports = {
     update: [],
     patch: [
       async context => {
-        let id = context.data.id_user;
+        let id = context.data.id_user.replace(/"/g, '');
         console.log('Generar entrada hook', id);
         //si el pago esta aprobado se genera la entrada una vez sola de lo contrario no se genera
 
