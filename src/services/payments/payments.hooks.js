@@ -9,13 +9,13 @@ module.exports = {
     update: [],
     patch: [
       async context => {
-        console.log('Generar entrada hook', context.result);
+        console.log('Generar entrada hook', context.data.id_user);
         //si el pago esta aprobado se genera la entrada una vez sola de lo contrario no se genera
         
         //comprobar si la entrada ya fue generada para no generarla de nuevo
         let entrada = await context.app.service('entradas').find({ 
           query: {
-            id_pago: context.result.id
+            id_pago: context.data.id_user
           }
         });
 
@@ -26,7 +26,7 @@ module.exports = {
             dni: null,
             estado: 'no-ingreso',
             consumision: true,
-            id_pago: context.result.id
+            id_pago: context.data.id_user
           });
         }else{
           console.log('Entrada ya generada');
