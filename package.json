@@ -51,6 +51,7 @@
     "feathers-memory": "^4.1.0",
     "feathers-mongoose": "^8.5.1",
     "helmet": "^5.1.0",
+    "mercadopago": "^1.5.16",
     "mongodb-core": "^3.2.7",
     "mongoose": "^6.3.6",
     "serve-favicon": "^2.5.0",

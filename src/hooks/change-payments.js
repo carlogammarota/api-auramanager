@@ -20,6 +20,7 @@ const app = express();
 // Middleware para procesar solicitudes con cuerpo JSON
 app.use(bodyParser.json());
 // eslint-disable-next-line no-unused-vars
+const id_ticket = null;
 module.exports = (options = {}) => {
   return async context => {
     // console.log('Webhook BODY', context.data);
@@ -44,6 +45,8 @@ module.exports = (options = {}) => {
       // pago.items.forEach(item => {
       //   totalPadreCompra += item.unit_price;
       // }
+
+      
       
       console.log("merchant_order", merchant_order)
     
@@ -56,6 +59,22 @@ module.exports = (options = {}) => {
         // if(payment.status == 'approved' && payment.status_detail == 'accredited' && totalCompra == totalPadreCompra && merchant_order.response.status == 'closed' && merchant_order.response.payments[index].status == 'approved' && merchant_order.response.payments[index].status_detail == 'accredited' && merchant_order.response.external_reference == external_reference_variable){
         if(payment.status == 'approved' && payment.status_detail == 'accredited'){
           console.log('El pago fue exitoso, HOLAAA!!!');
+          //aca es la logica de cuando la persona ya pago y todo salio bien
+
+          //aca se debe descargar el pdf con la entrada
+          
+          //crear servicio generar entrada y que devuelva el id de la entrada
+          let entrada = await context.app.service('entradas').create({
+            dni: null,
+            estado: 'no-ingreso',
+            consumision: true
+          });
+
+          console.log('entrada', entrada);
+          
+
+
+
           // let cliente = await axios.get('https://api.mercadolibre.com/users/'+ merchant_order.response.payer.id);
 
          
@@ -69,7 +88,7 @@ module.exports = (options = {}) => {
           console.log('merchant_order.response', idid);
 
           //  let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
-          //    estado: 'aprovado',
+          //    estado: 'aprobado',
           //    // id_orden: external_reference_variable
           //  })
 
@@ -78,14 +97,16 @@ module.exports = (options = {}) => {
           let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
           // console.log('estadoooooooooooooo', pago.estado);
 
-          // if(pago.estado == !'aprovado'){
+          // if(pago.estado == !'aprobado'){
           // console.log('entroooooooooooooooooooooooooooooooo
           try {
             let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
-              estado: 'aprovado',
-              // console.log(estado)
-              // id_orden: external_reference_variable
+              estado: 'aprobado',
             });
+
+            
+
+
 
             let getPayment = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
             console.log('getPayment', getPayment.id_comprador);

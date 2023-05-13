@@ -10,7 +10,10 @@ module.exports = function (app) {
   };
 
   // Initialize our service with any options it requires
-  app.use('/payments', new Payments(options, app));
+  app.use('/payments', new Payments(options, app), async function (req, res) {
+    console.log('Data', res.hook.result);
+    // res.redirect('/descargar-entradas/645d47d08688f7d0186cb609');
+  });
 
   // Get our initialized service so that we can register hooks
   const service = app.service('payments');
