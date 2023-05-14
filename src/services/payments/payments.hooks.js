@@ -24,7 +24,7 @@ module.exports = {
 
 
         //comprobar si en la variable pago.estado esta el estado
-        console.log('pagooooooooooooo', pago.data);
+        console.log('pagooooooooooooo', pago);
         // if(pago.estado == 'aprobado'){
         //   console.log('El pago esta aprobado');
 
