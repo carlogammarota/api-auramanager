@@ -74,7 +74,7 @@ module.exports = (options = {}) => {
     };
 
     let linkDePago = await mercadopago.preferences.create(pago);
-    context.result.linkDePago = linkDePago.response.init_point;
+    context.result.linkDePago = linkDePago.response.init_point  ;
 
     console.log('context.result', context.result);
 
@@ -97,6 +97,7 @@ module.exports = (options = {}) => {
       productos: context.result.items,
       linkDePago: linkDePago.response.init_point,
       estado: 'pendiente',
+      ticket_generado: false,
       id_user: JSON.stringify(res._id)
 
       // id_orden: external_reference_variable      
