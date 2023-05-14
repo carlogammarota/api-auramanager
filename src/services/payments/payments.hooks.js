@@ -9,37 +9,46 @@ module.exports = {
     update: [],
     patch: [
       async context => {
+        //QUE ESTE VERIFICANDO SI EL PAGO ESTA APROBADO Y SI LA ENTRADA NO FUE GENERADA
+
         let id = context.data.id_user.replace(/"/g, '');
         console.log('Generar entrada hook', id);
         //si el pago esta aprobado se genera la entrada una vez sola de lo contrario no se genera
 
-        //comprobar si el pago esta aprobado
+        //comprobar si el pago esta aprobado 
         let pago = await context.app.service('payments').get(id);
-        console.log('pago', pago);
-        if(pago.estado == 'aprobado'){
-          console.log('El pago esta aprobado');
 
         
-          //comprobar si la entrada ya fue generada para no generarla de nuevo
-          let entrada = await context.app.service('entradas').find({ 
-            query: {
-              id_pago: id
-            }
-          });
 
-          if(entrada.total == 0){
-            console.log('Entrada no generada');
-            //crear servicio generar entrada y que devuelva el id de la entrada
-            let entrada = await context.app.service('entradas').create({
-              dni: null,
-              estado: 'no-ingreso',
-              consumision: true,
-              id_pago: id
-            });
-          } else{
-            console.log('Entrada ya generada');
-          }
-        }
+
+
+
+        //comprobar si en la variable pago.estado esta el estado
+        console.log('pagooooooooooooo', pago.data);
+        // if(pago.estado == 'aprobado'){
+        //   console.log('El pago esta aprobado');
+
+        
+        //   //comprobar si la entrada ya fue generada para no generarla de nuevo
+        //   let entrada = await context.app.service('entradas').find({ 
+        //     query: {
+        //       id_pago: id
+        //     }
+        //   });
+
+        //   if(entrada.total == 0){
+        //     console.log('Entrada no generada');
+        //     //crear servicio generar entrada y que devuelva el id de la entrada
+        //     let entrada = await context.app.service('entradas').create({
+        //       dni: null,
+        //       estado: 'no-ingreso',
+        //       consumision: true,
+        //       id_pago: id
+        //     });
+        //   } else{
+        //     console.log('Entrada ya generada');
+        //   }
+        // }
         
         
 

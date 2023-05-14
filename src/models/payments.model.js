@@ -13,7 +13,8 @@ module.exports = function (app) {
     productos: { type: Array, required: false },
     linkDePago: { type: String, required: false },
     estado: { type: String, required: false },
-    external_reference: { type: String, required: false }
+    external_reference: { type: String, required: false },
+    ticket_generado: { type: Boolean, required: false },
   }, {
     timestamps: true
   });
