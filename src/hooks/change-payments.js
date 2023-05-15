@@ -65,15 +65,15 @@ module.exports = (options = {}) => {
           console.log('El pago fue exitoso, HOLAAA!!!');
 
 
-          if(generarEntrega == false && paymentId == payment.id){
-            let entrada = await context.app.service('entradas').create({
-              dni: null,
-              estado: 'no-ingreso',
-              consumision: true
-            });
-            console.log('entrada', entrada);
-            generarEntrega = true;
-          }
+          // if(generarEntrega == false && paymentId == payment.id){
+          //   let entrada = await context.app.service('entradas').create({
+          //     dni: null,
+          //     estado: 'no-ingreso',
+          //     consumision: true
+          //   });
+          //   console.log('entrada', entrada);
+          //   generarEntrega = true;
+          // }
 
 
 
@@ -105,6 +105,7 @@ module.exports = (options = {}) => {
 
           // console.log('paymentNew', paymentNew);
 
+
           let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
           // console.log('estadoooooooooooooo', pago.estado);
 
@@ -113,7 +114,11 @@ module.exports = (options = {}) => {
           try {
             let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
               estado: 'aprobado',
+              ticket_generado: false
             });
+
+            let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
+            console.log('aca va la logica', pago);
 
         
 
