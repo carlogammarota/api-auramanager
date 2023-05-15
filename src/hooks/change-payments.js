@@ -171,18 +171,18 @@ module.exports = (options = {}) => {
             //   consumision: true
             // });
 
-            console.log('entrada', entrada);
+            // console.log('entrada', entrada);
 
             
 
 
 
-            let getPayment = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
-            console.log('getPayment', getPayment.id_comprador);
-            //hacer un patch a la api que actualize la cuenta a premium
-            let premium = await context.app.service('users').patch( getPayment.id_comprador,{
-              premium: true
-            });
+            // let getPayment = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
+            // console.log('getPayment', getPayment.id_comprador);
+            // //hacer un patch a la api que actualize la cuenta a premium
+            // let premium = await context.app.service('users').patch( getPayment.id_comprador,{
+            //   premium: true
+            // });
 
 
             // console.log('paymentNew', paymentNew);

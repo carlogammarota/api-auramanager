@@ -57,9 +57,9 @@ module.exports = (options = {}) => {
       //   },
       // ],
       items: context.data.items,
-      payer: {
-        email: 'leo_elgigante_22@hotmail.com'
-      },
+      // payer: {
+      //   email: 'leo_elgigante_22@hotmail.com'
+      // },
       back_urls: {
         // success: 'https://alguientiene.com',
         pending: 'https://alguientiene.com',
@@ -95,7 +95,7 @@ module.exports = (options = {}) => {
     //si es premium
     let payment = await context.app.service('payments').patch(external_reference_variable ,{  
       id_comprador: context.data.id_comprador,
-      id_vendedor: preference.payer.email,
+      id_vendedor: 'no se sabe',
       type: 'premium',
       productos: context.result.items,
       linkDePago: linkDePago.response.init_point,
