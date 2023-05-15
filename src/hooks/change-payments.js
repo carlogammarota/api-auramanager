@@ -128,7 +128,7 @@ module.exports = (options = {}) => {
               let entrada = await context.app.service('entradas').create({
                 dni: null,
                 estado: 'no-ingreso',
-                consumision: true,
+                consumicion: true,
               });
 
               //editar el estado del pago a ticket generado true
@@ -136,7 +136,7 @@ module.exports = (options = {}) => {
                 ticket_generado: true,
                 id_ticket: entrada._id,
               });
-              
+
               console.log('entrada generada', entrada);
             }
 
