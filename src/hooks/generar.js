@@ -37,7 +37,7 @@ module.exports = (options = {}) => {
     external_reference_variable = res._id;
     
 
-    const pago = {
+    const preference  = {
       // items: [
       //   {
       //     id: '1',
@@ -56,7 +56,7 @@ module.exports = (options = {}) => {
       // ],
       items: context.data.items,
       payer: {
-        email: 'carlo.gammarota@gmail.com'
+        email: 'leo_elgigante_22@hotmail.com'
       },
       back_urls: {
         // success: 'https://alguientiene.com',
@@ -74,7 +74,7 @@ module.exports = (options = {}) => {
       // notification_url: 'https://api.alguientiene.com/mercadopago',
     };
 
-    let linkDePago = await mercadopago.preferences.create(pago);
+    let linkDePago = await mercadopago.preferences.create(preference );
     context.result.linkDePago = linkDePago.response.init_point  ;
 
     console.log('context.result', context.result);
@@ -93,7 +93,7 @@ module.exports = (options = {}) => {
     //si es premium
     let payment = await context.app.service('payments').patch(external_reference_variable ,{  
       id_comprador: context.data.id_comprador,
-      id_vendedor: pago.payer.email,
+      id_vendedor: preference.payer.email,
       type: 'premium',
       productos: context.result.items,
       linkDePago: linkDePago.response.init_point,
