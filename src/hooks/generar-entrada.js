@@ -23,7 +23,7 @@ module.exports = (options = {}) => {
       // id_entrada  = 
       const entrada = {
         name: '+',
-        lastName: '1 Consumision',
+        lastName: '1 Consumición',
         address: '#Ticket',
         addressNumber: 'Aura Productora',
         city: 'Valpisa Lab',

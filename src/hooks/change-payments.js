@@ -122,8 +122,8 @@ module.exports = (options = {}) => {
             //si el ticket no esta generado, se debe generar el ticket y guardarlo en la base de datos ticket true
             if(pago.ticket_generado == false){
               let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
-              estado: 'aprobado',
-            });
+                estado: 'aprobado',
+              });
               console.log('pago.ticket_generado', pago.ticket_generado);
               let entrada = await context.app.service('entradas').create({
                 dni: null,
@@ -136,18 +136,8 @@ module.exports = (options = {}) => {
                 ticket_generado: true,
                 id_ticket: entrada._id,
               });
-
-
               
-
-
-
-
               console.log('entrada generada', entrada);
-
-
-
-
             }
 
             
