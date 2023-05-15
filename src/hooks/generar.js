@@ -59,10 +59,11 @@ module.exports = (options = {}) => {
         email: 'carlo.gammarota@gmail.com'
       },
       back_urls: {
-        success: 'https://alguientiene.com',
+        // success: 'https://alguientiene.com',
         pending: 'https://alguientiene.com',
-        failure: 'https://alguientiene.com'
-        // success: 'https://cb51-190-30-39-222.sa.ngrok.io/pago-exitoso',
+        // external_reference_variable
+        failure: 'https://alguientiene.com',
+        success: 'https://apiauramanager.alguientiene.com/descargar-entradas/' + external_reference_variable,
         // pending: 'https://cb51-190-30-39-222.sa.ngrok.io/pago-pendiente',
         // failure: 'https://cb51-190-30-39-222.sa.ngrok.io/pago-fallido'
       },
