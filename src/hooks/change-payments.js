@@ -114,16 +114,16 @@ module.exports = (options = {}) => {
           // if(pago.estado == !'aprobado'){
           // console.log('entroooooooooooooooooooooooooooooooo
           try {
-            let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
-              estado: 'aprobado',
-              ticket_generado: false,
-            });
+            
 
             let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
             console.log('aca va la logica', pago.ticket_generado);
             
             //si el ticket no esta generado, se debe generar el ticket y guardarlo en la base de datos ticket true
             if(pago.ticket_generado == false){
+              let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
+              estado: 'aprobado',
+            });
               console.log('pago.ticket_generado', pago.ticket_generado);
               let entrada = await context.app.service('entradas').create({
                 dni: null,

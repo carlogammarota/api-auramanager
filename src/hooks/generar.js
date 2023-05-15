@@ -27,7 +27,9 @@ module.exports = (options = {}) => {
     console.log('Generar pago', context.result);
 
 
-    let res = await context.app.service('payments').create({});
+    let res = await context.app.service('payments').create({
+      ticket_generado: false,
+    });
 
     // let id = JSON.stringify(res._id);
     // let id = JSON.parse(JSON.stringify(res._id));

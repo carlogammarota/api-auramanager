@@ -33,7 +33,7 @@ module.exports = (options = {}) => {
 
       const skus = 'Viernes 19 de Mayo 2023';
       //datos de la imagen del qr
-      datos = id_entrada;
+      let datos = id_entrada;
     
 
 
