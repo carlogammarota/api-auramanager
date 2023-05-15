@@ -6,7 +6,7 @@ const mercadopago = require('mercadopago');
 axios = require('axios');
 mercadopago.configure({
   sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
-  access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
+  access_token: 'APP_USR-114968102990097-051422-4304eafc70b7b7cda809677af7acd94a-94662750'
   // aquí debes colocar tu Client Secret
 });
 
