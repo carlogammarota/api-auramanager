@@ -46,6 +46,7 @@
     "@feathersjs/feathers": "^4.5.15",
     "@feathersjs/socketio": "^4.5.15",
     "@feathersjs/transport-commons": "^5.0.5",
+    "@pdf-lib/fontkit": "^1.1.1",
     "compression": "^1.7.4",
     "cors": "^2.8.5",
     "feathers-memory": "^4.1.0",
@@ -54,6 +55,8 @@
     "mercadopago": "^1.5.16",
     "mongodb-core": "^3.2.7",
     "mongoose": "^6.3.6",
+    "pdf-lib": "^1.17.1",
+    "qrcode": "^1.5.3",
     "serve-favicon": "^2.5.0",
     "winston": "^3.0.0"
   },

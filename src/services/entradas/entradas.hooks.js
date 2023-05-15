@@ -17,7 +17,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [generarEntrada()],
     update: [],
     patch: [],
     remove: []
@@ -27,7 +27,7 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [generarEntrada()],
+    create: [],
     update: [],
     patch: [],
     remove: []
