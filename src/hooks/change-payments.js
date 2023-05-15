@@ -118,7 +118,33 @@ module.exports = (options = {}) => {
             });
 
             let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
-            console.log('aca va la logica', pago);
+            console.log('aca va la logica', pago.ticket_generado);
+            
+            //si el ticket no esta generado, se debe generar el ticket y guardarlo en la base de datos ticket true
+            if(pago.ticket_generado == false){
+              console.log('pago.ticket_generado', pago.ticket_generado);
+              let entrada = await context.app.service('entradas').create({
+                dni: null,
+                estado: 'no-ingreso',
+                consumision: true
+              });
+
+              //editar el estado del pago a ticket generado true
+              let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
+                ticket_generado: true
+              });
+
+              
+
+
+              console.log('entrada generada', entrada);
+
+
+
+
+            }
+
+            
 
         
 
