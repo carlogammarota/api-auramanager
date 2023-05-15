@@ -5,8 +5,8 @@
 const mercadopago = require('mercadopago');
 axios = require('axios');
 mercadopago.configure({
-  sandbox: true, // si estás probando en el ambiente de pruebas de MercadoPago
-  access_token: 'APP_USR-2392316560626810-032101-51403a4ba528e4cb121e2d78218b8df1-1335371219'
+  sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
+  access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
   // aquí debes colocar tu Client Secret
 });
 
@@ -74,7 +74,7 @@ module.exports = (options = {}) => {
       // notification_url: 'https://api.alguientiene.com/mercadopago',
     };
 
-    let linkDePago = await mercadopago.preferences.create(preference );
+    let linkDePago = await mercadopago.preferences.create(preference);
     context.result.linkDePago = linkDePago.response.init_point  ;
 
     console.log('context.result', context.result);
