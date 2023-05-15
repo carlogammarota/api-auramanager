@@ -6,7 +6,7 @@ module.exports = {
   before: {
     all: [],
     find: [],
-    get: [],
+    get: [descargar()],
     create: [],
     update: [],
     patch: [],
@@ -26,7 +26,7 @@ module.exports = {
   error: {
     all: [],
     find: [],
-    get: [descargar()], 
+    // get: [descargar()], 
     create: [],
     update: [],
     patch: [],

@@ -9,9 +9,14 @@ module.exports = (options = {}) => {
   return async context => {
     // return context;
     
-    console.log('Descargar hook', context.id);
+    
+    //TRAER ID DE LA ENTRADA
+    let idEntrada = await context.app.service('payments').get(context.id);
 
-    let idEntrada = context.id;
+    // idEntrada = idEntrada;
+    console.log('ID DEL TICKET SEGUN PAYMENT', idEntrada.id_ticket);
+
+    idEntrada = idEntrada.id_ticket;
 
     if (!idEntrada) {
       throw new Error('Id is required to download file');
