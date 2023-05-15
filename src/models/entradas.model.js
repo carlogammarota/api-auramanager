@@ -10,7 +10,8 @@ module.exports = function (app) {
     dni: { type: String, required: false },
     estado: { type: String, required: true },
     consumision: { type: Boolean, required: true },
-    id_pago: { type: String, required: true }
+    id_pago: { type: String, required: false },
+
 
   }, {
     timestamps: true
