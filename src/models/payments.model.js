@@ -15,6 +15,7 @@ module.exports = function (app) {
     estado: { type: String, required: false },
     external_reference: { type: String, required: false },
     ticket_generado: { type: Boolean, required: false },
+    id_ticket: { type: String, required: false },
   }, {
     timestamps: true
   });

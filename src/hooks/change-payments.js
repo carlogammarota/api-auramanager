@@ -114,7 +114,7 @@ module.exports = (options = {}) => {
           try {
             let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
               estado: 'aprobado',
-              ticket_generado: false
+              ticket_generado: false,
             });
 
             let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
@@ -131,7 +131,8 @@ module.exports = (options = {}) => {
 
               //editar el estado del pago a ticket generado true
               let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
-                ticket_generado: true
+                ticket_generado: true,
+                id_ticket: entrada._id,
               });
 
 
