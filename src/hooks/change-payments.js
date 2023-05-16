@@ -222,14 +222,6 @@ module.exports = (options = {}) => {
               enviarCorreo();
 
 
-              transporter.sendMail(mailOptions, (error, info) => {
-                if (error) {
-                  console.log('Error al enviar el correo electrónico: ' + error);
-                } else {
-                  console.log('Correo electrónico enviado ');
-                }
-              });
-
 
               //cierra el pago
               //editar el estado del pago a ticket generado true
