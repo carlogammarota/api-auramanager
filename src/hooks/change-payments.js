@@ -13,6 +13,10 @@ mercadopago.configure({
   // aquí debes colocar tu Client Secret
 });
 
+const nodemailer = require("nodemailer");
+// const axios = require('axios');
+const usersArray = [];
+
 
 
 const express = require('express');
@@ -123,18 +127,12 @@ module.exports = (options = {}) => {
             
             //si el ticket no esta generado, se debe generar el ticket y guardarlo en la base de datos ticket true
             if(pago.ticket_generado == false){
+
               let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
                 estado: 'aprobado',
               });
               console.log('pago.ticket_generado', pago.ticket_generado);
-              // let entrada = await context.app.service('entradas').create({
-              //   dni: null,
-              //   estado: 'no-ingreso',
-              //   consumicion: true,
-              //   paymentId: paymentId,
-              //   // cantidad: pago.cantidadTickets
-              // });
-              //un dependera de la cantidad de tickets que haya comprado el usuario
+
               for (let index = 0; index < pago.cantidadTickets; index++) {
                 const element = pago.cantidadTickets[index];
                 console.log('element', element);
@@ -146,9 +144,91 @@ module.exports = (options = {}) => {
                 // cantidad: pago.cantidadTickets
                 });
               }
-            
 
 
+
+              //enviar email
+
+              let linkEntradas = await context.app.service('link-entradas').get(pago._id)
+
+              
+//     "linkEntradas": [
+//         {
+//             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c5ef88831bf2e0b755",
+//             "idTicket": "646325c5ef88831bf2e0b755",
+//             "idNumero": 1
+//         },
+//         {
+//             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c5ef88831bf2e0b757",
+//             "idTicket": "646325c5ef88831bf2e0b757",
+//             "idNumero": 2
+//         },
+//         {
+//             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c8ef88831bf2e0b759",
+//             "idTicket": "646325c8ef88831bf2e0b759",
+//             "idNumero": 3
+//         }
+//     ]
+// }
+              let links = [];
+              linkEntradas.linkEntradas.forEach(async element => {
+                console.log('element', element);
+                links.push(element.link);
+              });
+
+              //crear una etiqueta html div que contendra los links de las entradas
+              let linksHtml = '';
+              links.forEach(element => {
+                linksHtml += '<a href="'+element+'">Entrada</a> <br>';
+              });
+
+
+
+
+
+
+              const transporter = nodemailer.createTransport({
+                host: "smtp.sendgrid.net",
+                port: 465,
+                secure: true,
+                auth: {
+                  user: 'apikey',
+                  pass: "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",
+                },
+              });
+
+              const mailOptions = {
+                  from: "alguientienepunilla@gmail.com",
+                  // to: users[i].email,
+                  to: 'carlo.gammarota@gmail.com',
+                  subject: 'Ticket - Aura Productora',
+                  text: 'Ticket - Aura Productora',
+                  html: `
+                    <html>
+                      <head>
+                        <title>Ticket Aura Productora</title>
+                      </head>
+                      <body>
+                        <p>Aqui tienes tu Ticket,</p>
+                        <p>Descarga tus Tickets!</p>
+                        Links: <br>
+                        <p>${linksHtml}</p>
+                      </body>
+                    </html>
+                  `
+                };
+
+
+                transporter.sendMail(mailOptions, (error, info) => {
+                  if (error) {
+                    console.log("Error al enviar el correo electrónico: " + error);
+                  } else {
+                    console.log("Correo electrónico enviado ");
+                  }
+                });
+
+
+                //cierra el pago
               //editar el estado del pago a ticket generado true
               let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
                 ticket_generado: true,

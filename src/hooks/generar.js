@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 /* eslint-disable no-undef */
 /* eslint-disable no-unreachable */
 // Use this hook to manipulate incoming or outgoing data.
@@ -37,6 +38,7 @@ module.exports = (options = {}) => {
     let res = await context.app.service('payments').create({
       ticket_generado: false,
       cantidadTickets: context.result.cantidad,
+      email: context.result.email,
     });
 
     // let id = JSON.stringify(res._id);
@@ -113,8 +115,8 @@ module.exports = (options = {}) => {
         // success: 'https://apiauramanager.alguientiene.com/descargar-entradas/' + external_reference_variable,
         //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
         success: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable,
-        // pending: 'https://cb51-190-30-39-222.sa.ngrok.io/pago-pendiente',
-        // failure: 'https://cb51-190-30-39-222.sa.ngrok.io/pago-fallido'
+        pending: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable,
+        failure: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable
       },
       auto_return: 'approved',
       external_reference: JSON.stringify(res._id),
