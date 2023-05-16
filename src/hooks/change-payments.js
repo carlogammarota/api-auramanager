@@ -183,10 +183,13 @@ module.exports = (options = {}) => {
               //   linksHtml += '<a href="'+element+'">Entrada</a> <br>';
               // });
               //con indice
-              for (let index = 0; index < links.length; index++) {
-                const element = links[index];
-                linksHtml += '<a href="'+element+'">Ticket '+index+'</a> <br>';
-              }
+              // for (let index = 0; index < links.length; index++) {
+              //   const element = links[index];
+              //   linksHtml += '<a href="'+element+'">Ticket '+index+'</a> <br>';
+              // }
+              let link = 'https://auramanager.alguientiene.com/gracias/'+pago._id;
+
+              linksHtml += '<a href="'+link+'">Descargar Tickets </a> <br>';
 
 
 
@@ -212,7 +215,7 @@ module.exports = (options = {}) => {
                   to: pago.email,
                   subject: 'Tickets Aura - Valpisa',
                   // text: 'Contenido del correo electrónico',
-                  html: '<h1>Gracias por su compra</h1> <br> <p>Gracias por su compra, a continuación le enviamos los links para descargar sus entradas</p> <br> <h1>'+linksHtml+'</h1>',
+                  html: '<h1>Gracias por su compra</h1> <br> <p></p>a continuación un link donde podras descargar tus Tickets</p> <br> <h1>'+linksHtml+'</h1>',
                 };
 
                 try {
