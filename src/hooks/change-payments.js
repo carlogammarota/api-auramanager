@@ -151,7 +151,7 @@ module.exports = (options = {}) => {
               //editar el estado del pago a ticket generado true
               let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
                 ticket_generado: true,
-                id_ticket: entrada._id,
+                // id_ticket: entrada._id,
               });
 
               console.log('entrada generada', entrada);
