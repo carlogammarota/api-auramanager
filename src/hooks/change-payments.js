@@ -129,6 +129,8 @@ module.exports = (options = {}) => {
                 dni: null,
                 estado: 'no-ingreso',
                 consumicion: true,
+                paymentId: paymentId,
+                cantidad: pago.cantidadTickets
               });
 
               //editar el estado del pago a ticket generado true

@@ -11,6 +11,8 @@ module.exports = function (app) {
     estado: { type: String, required: true },
     consumicion: { type: Boolean, required: true },
     id_pago: { type: String, required: false },
+    paymentId: { type: String, required: false },
+    cantidad: { type: Number, required: false },
 
 
   }, {

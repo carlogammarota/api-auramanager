@@ -29,6 +29,7 @@ module.exports = (options = {}) => {
 
     let res = await context.app.service('payments').create({
       ticket_generado: false,
+      cantidadTickets: context.result.cantidad,
     });
 
     // let id = JSON.stringify(res._id);
@@ -37,6 +38,40 @@ module.exports = (options = {}) => {
     // // this.toString
 
     external_reference_variable = res._id;
+
+    let cantidad = context.result.cantidad;
+    // console.log('cantidad', cantidad);
+    // eslint-disable-next-line no-unused-vars
+    let email = context.result.email;
+
+    let entradas = [];
+
+    for (let i = 0; i < cantidad; i++) {
+      entradas.push({
+        'id': i,
+        'title': 'Entrada',
+        'description': 'Se Realiza en Valpisa',
+        'quantity': 1,
+        'currency_id': 'ARS',
+        'unit_price': 10
+      });
+    }
+
+
+
+    
+
+
+
+    // let entradas = [{
+    //   'id': 1,
+    //   'title': 'Cuenta Premium',
+    //   'description': 'Tendrás la oportunidad de publicar más de 5 productos en nuestra tienda en línea',
+    //   'quantity': 1,
+    //   'currency_id': 'ARS',
+    //   'unit_price': 10
+    // }];
+    
     
 
     const preference  = {
@@ -56,7 +91,9 @@ module.exports = (options = {}) => {
       //     unit_price: 1000
       //   },
       // ],
-      items: context.data.items,
+      // items: context.data.items,
+      items: entradas,
+
       // payer: {
       //   email: 'leo_elgigante_22@hotmail.com'
       // },
@@ -101,7 +138,9 @@ module.exports = (options = {}) => {
       linkDePago: linkDePago.response.init_point,
       estado: 'pendiente',
       ticket_generado: false,
-      id_user: JSON.stringify(res._id)
+      id_user: JSON.stringify(res._id),
+      cantidadTickets: cantidad,
+      email: email,
 
       // id_orden: external_reference_variable      
     });

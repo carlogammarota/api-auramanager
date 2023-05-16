@@ -16,6 +16,8 @@ module.exports = function (app) {
     external_reference: { type: String, required: false },
     ticket_generado: { type: Boolean, required: false },
     id_ticket: { type: String, required: false },
+    cantidadTickets: { type: Number, required: false },
+    email: { type: String, required: false },
   }, {
     timestamps: true
   });
