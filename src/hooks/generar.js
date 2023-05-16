@@ -5,8 +5,15 @@
 const mercadopago = require('mercadopago');
 axios = require('axios');
 mercadopago.configure({
-  sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
-  access_token: 'APP_USR-114968102990097-051422-4304eafc70b7b7cda809677af7acd94a-94662750'
+  sandbox: true, // si estás probando en el ambiente de pruebas de MercadoPago
+  
+  access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
+
+
+  //produccion
+  // access_token: 'APP_USR-114968102990097-051422-4304eafc70b7b7cda809677af7acd94a-94662750'
+
+  
   // aquí debes colocar tu Client Secret
 });
 
@@ -102,7 +109,10 @@ module.exports = (options = {}) => {
         pending: 'https://alguientiene.com',
         // external_reference_variable
         failure: 'https://alguientiene.com',
-        success: 'https://apiauramanager.alguientiene.com/descargar-entradas/' + external_reference_variable,
+        //este es para descargar la entrada de una
+        // success: 'https://apiauramanager.alguientiene.com/descargar-entradas/' + external_reference_variable,
+        //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
+        success: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable,
         // pending: 'https://cb51-190-30-39-222.sa.ngrok.io/pago-pendiente',
         // failure: 'https://cb51-190-30-39-222.sa.ngrok.io/pago-fallido'
       },
