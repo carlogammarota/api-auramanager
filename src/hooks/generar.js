@@ -37,7 +37,7 @@ module.exports = (options = {}) => {
     let res = await context.app.service('payments').create({
       ticket_generado: false,
       cantidadTickets: context.result.cantidad,
-      paymentId: null,
+      paymentId: "no paid",
     });
 
     // let id = JSON.stringify(res._id);
