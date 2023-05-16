@@ -1,3 +1,4 @@
+/* eslint-disable no-inner-declarations */
 /* eslint-disable no-unused-vars */
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
@@ -187,36 +188,38 @@ module.exports = (options = {}) => {
 
               console.log('pago.email', pago.email);
 
-              const transporter = nodemailer.createTransport({
-                host: 'smtp.sendgrid.net',
-                port: 465,
-                secure: true,
-                auth: {
-                  user: 'apikey',
-                  pass: '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',
-                },
-              });
+              
 
-              const mailOptions = {
-                from: 'alguientienepunilla@gmail.com',
-                // to: users[i].email,
-                to: pago.email,
-                subject: 'Ticket - Aura Productora',
-                text: 'Ticket - Aura Productora',
-                html: `
-                    <html>
-                      <head>
-                        <title>Ticket Aura Productora</title>
-                      </head>
-                      <body>
-                        <p>Aqui tienes tu Ticket,</p>
-                        <p>Descarga tus Tickets!</p>
-                        Links: <br>
-                        <p>test</p>
-                      </body>
-                    </html>
-                  `
-              };
+              async function enviarCorreo() {
+                // Configuración del transporte del correo electrónico
+                const transporter = nodemailer.createTransport({
+                  host: 'smtp-relay.sendinblue.com',
+                  port: 587,
+                  auth: {
+                    user: 'carlo.gammarota@gmail.com',
+                    pass: 'wv5Xn140CbZDW9HR',
+                  },
+                });
+
+                // Detalles del correo electrónico
+                const mailOptions = {
+                  from: 'carlo.gammarota@gmail.com',
+                  to: pago.email,
+                  subject: 'Tickets Aura - Valpisa',
+                  // text: 'Contenido del correo electrónico',
+                  html: '<h1>Gracias por su compra</h1> <br> <p>Gracias por su compra, a continuación le enviamos los links para descargar sus entradas</p> <br> <p>'+linksHtml+'</p>',
+                };
+
+                try {
+                  // Envío del correo electrónico
+                  const info = await transporter.sendMail(mailOptions);
+                  console.log('Correo electrónico enviado:', info.response);
+                } catch (error) {
+                  console.error('Error al enviar el correo electrónico:', error);
+                }
+              }
+
+              enviarCorreo();
 
 
               transporter.sendMail(mailOptions, (error, info) => {
