@@ -191,10 +191,10 @@ module.exports = (options = {}) => {
     // let id_entrada = id_entrada;
 
     generar(id_entrada).then((data) => {
-        fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
-        }).catch((err) => {
-            console.log(err);
-        }
+      fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
+    }).catch((err) => {
+      console.log(err);
+    }
     );
 
     // let entradas = ['645d47798688f7d0186cb5fa', '645d47d08688f7d0186cb609', '645d74db744bdfa7332e7f93', '645d74dc744bdfa7332e7f95', '645d74dd744bdfa7332e7f97'];

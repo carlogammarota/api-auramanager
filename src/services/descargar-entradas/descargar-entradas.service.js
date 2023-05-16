@@ -23,12 +23,13 @@ module.exports = function (app) {
     // idEntrada = JSON.stringify(idEntrada);
     // idEntrada = idEntrada.replace(/"/g, '');
 
-    console.log('ID PAYMENT', res.hook.id);
-    let idEntrada = await app.service('payments').get(res.hook.id);
+    console.log('res.hook.id', res.hook.id);
+    // let idEntrada = await app.service('payments').get(res.hook.id);
+    // let idEntrada = await app.service('payments').get(res.hook.id);
 
-    console.log('ID DEL TICKET SEGUN PAYMENT', idEntrada.id_ticket);
+    // console.log('ID DEL TICKET SEGUN PAYMENT', idEntrada.id_ticket);
 
-    console.log('ID DE LA LA ENTRADA', idEntrada);
+    // console.log('ID DE LA LA ENTRADA', idEntrada);
 
     // console.log('ID DE LA LA ENTRADA', idEntrada);
 
@@ -41,7 +42,7 @@ module.exports = function (app) {
       try {
         console.log('DescargarEntradas', 'DescargarEntradas');
 
-        res.download('./entradas/'+ idEntrada.id_ticket +'.pdf');
+        res.download('./entradas/'+ res.hook.id +'.pdf');
         // res.download('./645d47d08688f7d0186cb609.pdf');
 
       } catch (e) {

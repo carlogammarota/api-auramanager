@@ -4,7 +4,9 @@ module.exports = {
   before: {
     all: [],
     find: [],
-    get: [],
+    get: [
+
+    ],
     create: [],
     update: [],
     patch: [
@@ -62,7 +64,63 @@ module.exports = {
   after: {
     all: [],
     find: [],
-    get: [],
+    get: [
+      
+      async context => {
+        console.log('context', context.id);
+        console.log('context result', context.result);
+        //buscar en la coleccion entradas y devolver todos las entradas que tengan el mismo paymentId que el id de la entrada
+        let entradas = await context.app.service('entradas').find({
+          query: {
+            paymentId: context.id
+          }
+        });
+
+        console.log('entradas', entradas.data);
+
+        entradas =  entradas.data
+
+        let linkEntradas = []
+
+
+        
+        for (let index = 0; index < entradas.length; index++) {
+          const ticket = entradas[index];
+          console.log('ticket', ticket);
+          let idTicket = ticket._id;
+          let idNumero = index;
+          let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
+
+          linkEntradas.push({
+            link: link,
+            idTicket: idTicket,
+            idNumero: idNumero + 1
+          });
+          
+        }
+
+        // for (let i = 0; i < entradas.length; i++) {
+
+        //   console.log('entradas', entradas.data[i]);
+          
+        //   let idTicket = entradas.data[i]._id;
+        //   let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
+
+        //   linkEntradas.push({
+        //     link: link,
+        //     idTicket: idTicket
+        //   });
+        // }
+
+
+        context.result.linkEntradas = linkEntradas;
+
+        return context;
+
+        
+
+      }
+    ],
     create: [],
     update: [],
     patch: [],

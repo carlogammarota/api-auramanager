@@ -10,22 +10,24 @@ module.exports = (options = {}) => {
     // return context;
     
     
+    
     //TRAER ID DE LA ENTRADA
-    let idEntrada = await context.app.service('payments').get(context.id);
+    // let idEntrada = await context.app.service('payments').get(context.id);
 
-    // idEntrada = idEntrada;
-    console.log('ID DEL TICKET SEGUN PAYMENT', idEntrada.id_ticket);
+    // // idEntrada = idEntrada;
+    // console.log('ID DEL TICKET SEGUN PAYMENT', idEntrada.id_ticket);
 
-    idEntrada = idEntrada.id_ticket;
+    // idEntrada = context.id;
+    console.log('context.id', context.id);
 
-    if (!idEntrada) {
+    if (!context.id) { 
       throw new Error('Id is required to download file');
     }
 
 
     // const filePath = `./${idEntrada}`;
     //agregarle la raiz
-    const filePath = path.join('./entradas/'+ idEntrada + '.pdf');
+    const filePath = path.join('./entradas/'+ context.id + '.pdf');
     // const filePath = path.join(__dirname, `/entradas/${idEntrada}`);
 
     // Verificar si el archivo existe

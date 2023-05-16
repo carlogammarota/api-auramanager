@@ -16,7 +16,7 @@ module.exports = {
   after: {
     all: [],
     find: [],
-    get: [],
+    // get: [descargar()],
     create: [],
     update: [],
     patch: [],

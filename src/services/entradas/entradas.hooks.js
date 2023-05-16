@@ -6,7 +6,9 @@ module.exports = {
   before: {
     // all: [ authenticate('jwt') ],
     find: [],
-    get: [],
+    get: [
+
+    ],
     create: [],
     update: [],
     patch: [],
