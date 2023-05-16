@@ -13,7 +13,7 @@ mercadopago.configure({
   // aquí debes colocar tu Client Secret
 });
 
-const nodemailer = require("nodemailer");
+const nodemailer = require('nodemailer');
 // const axios = require('axios');
 const usersArray = [];
 
@@ -149,27 +149,27 @@ module.exports = (options = {}) => {
 
               //enviar email
 
-              let linkEntradas = await context.app.service('link-entradas').get(pago._id)
+              let linkEntradas = await context.app.service('link-entradas').get(pago._id);
 
               
-//     "linkEntradas": [
-//         {
-//             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c5ef88831bf2e0b755",
-//             "idTicket": "646325c5ef88831bf2e0b755",
-//             "idNumero": 1
-//         },
-//         {
-//             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c5ef88831bf2e0b757",
-//             "idTicket": "646325c5ef88831bf2e0b757",
-//             "idNumero": 2
-//         },
-//         {
-//             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c8ef88831bf2e0b759",
-//             "idTicket": "646325c8ef88831bf2e0b759",
-//             "idNumero": 3
-//         }
-//     ]
-// }
+              //     "linkEntradas": [
+              //         {
+              //             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c5ef88831bf2e0b755",
+              //             "idTicket": "646325c5ef88831bf2e0b755",
+              //             "idNumero": 1
+              //         },
+              //         {
+              //             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c5ef88831bf2e0b757",
+              //             "idTicket": "646325c5ef88831bf2e0b757",
+              //             "idNumero": 2
+              //         },
+              //         {
+              //             "link": "https://apiauramanager.alguientiene.com/descargar-entradas/646325c8ef88831bf2e0b759",
+              //             "idTicket": "646325c8ef88831bf2e0b759",
+              //             "idNumero": 3
+              //         }
+              //     ]
+              // }
               let links = [];
               linkEntradas.linkEntradas.forEach(async element => {
                 console.log('element', element);
@@ -185,25 +185,25 @@ module.exports = (options = {}) => {
 
 
 
-
+              console.log('pago.email', pago.email);
 
               const transporter = nodemailer.createTransport({
-                host: "smtp.sendgrid.net",
+                host: 'smtp.sendgrid.net',
                 port: 465,
                 secure: true,
                 auth: {
                   user: 'apikey',
-                  pass: "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",
+                  pass: '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',
                 },
               });
 
               const mailOptions = {
-                  from: "alguientienepunilla@gmail.com",
-                  // to: users[i].email,
-                  to: 'carlo.gammarota@gmail.com',
-                  subject: 'Ticket - Aura Productora',
-                  text: 'Ticket - Aura Productora',
-                  html: `
+                from: 'alguientienepunilla@gmail.com',
+                // to: users[i].email,
+                to: pago.email,
+                subject: 'Ticket - Aura Productora',
+                text: 'Ticket - Aura Productora',
+                html: `
                     <html>
                       <head>
                         <title>Ticket Aura Productora</title>
@@ -216,19 +216,19 @@ module.exports = (options = {}) => {
                       </body>
                     </html>
                   `
-                };
+              };
 
 
-                transporter.sendMail(mailOptions, (error, info) => {
-                  if (error) {
-                    console.log("Error al enviar el correo electrónico: " + error);
-                  } else {
-                    console.log("Correo electrónico enviado ");
-                  }
-                });
+              transporter.sendMail(mailOptions, (error, info) => {
+                if (error) {
+                  console.log('Error al enviar el correo electrónico: ' + error);
+                } else {
+                  console.log('Correo electrónico enviado ');
+                }
+              });
 
 
-                //cierra el pago
+              //cierra el pago
               //editar el estado del pago a ticket generado true
               let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
                 ticket_generado: true,
