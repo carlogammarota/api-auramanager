@@ -141,7 +141,7 @@ module.exports = (options = {}) => {
                   dni: null,
                   estado: 'no-ingreso',
                   consumicion: true,
-                  paymentId: paymentId,
+                  paymentId: pago._id,
                 // cantidad: pago.cantidadTickets
                 });
               }
