@@ -67,8 +67,9 @@ module.exports = {
     get: [
       
       async context => {
+        console.log('HOOK PAYMENT GET');
         console.log('context', context.id);
-        console.log('context result', context.result);
+        console.log('context.result.productos', context.result.productos);
         //buscar en la coleccion entradas y devolver todos las entradas que tengan el mismo paymentId que el id de la entrada
         let entradas = await context.app.service('entradas').find({
           query: {
@@ -76,29 +77,29 @@ module.exports = {
           }
         });
 
-        console.log('entradas', entradas.data);
+        console.log('entradas', entradas);
 
-        entradas =  entradas.data
+        // entradas =  entradas.data
 
         let linkEntradas = []
 
 
         
-        for (let index = 0; index < entradas.length; index++) {
-          const ticket = entradas[index];
-          console.log('ticket', ticket);
-          let idTicket = ticket._id;
-          let idNumero = index;
-          let link = `https://apiauramanager.alguientiene.com/descargar-entradas/${idTicket}`;
-          // let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
+        // for (let index = 0; index < context.result.productos.length; index++) {
+        //   const ticket = entradas[index];
+        //   console.log('ticket', ticket);
+        //   let idTicket = ticket._id;
+        //   let idNumero = index;
+        //   let link = `https://apiauramanager.alguientiene.com/descargar-entradas/${idTicket}`;
+        //   // let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
 
-          linkEntradas.push({
-            link: link,
-            idTicket: idTicket,
-            idNumero: idNumero + 1
-          });
+        //   linkEntradas.push({
+        //     link: link,
+        //     idTicket: idTicket,
+        //     idNumero: idNumero + 1
+        //   });
           
-        }
+        // }
 
         // for (let i = 0; i < entradas.length; i++) {
 
