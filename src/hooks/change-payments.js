@@ -179,9 +179,14 @@ module.exports = (options = {}) => {
 
               //crear una etiqueta html div que contendra los links de las entradas
               let linksHtml = '';
-              links.forEach(element => {
-                linksHtml += '<a href="'+element+'">Entrada</a> <br>';
-              });
+              // links.forEach(element => {
+              //   linksHtml += '<a href="'+element+'">Entrada</a> <br>';
+              // });
+              //con indice
+              for (let index = 0; index < links.length; index++) {
+                const element = links[index];
+                linksHtml += '<a href="'+element+'">Ticket '+index+'</a> <br>';
+              }
 
 
 
@@ -207,7 +212,7 @@ module.exports = (options = {}) => {
                   to: pago.email,
                   subject: 'Tickets Aura - Valpisa',
                   // text: 'Contenido del correo electrónico',
-                  html: '<h1>Gracias por su compra</h1> <br> <p>Gracias por su compra, a continuación le enviamos los links para descargar sus entradas</p> <br> <p>'+linksHtml+'</p>',
+                  html: '<h1>Gracias por su compra</h1> <br> <p>Gracias por su compra, a continuación le enviamos los links para descargar sus entradas</p> <br> <h1>'+linksHtml+'</h1>',
                 };
 
                 try {
