@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const mercadopago = require('mercadopago');
@@ -154,6 +155,7 @@ module.exports = (options = {}) => {
                 // id_ticket: entrada._id,
               });
 
+              // eslint-disable-next-line no-undef
               console.log('entrada generada', entrada);
             }
 
