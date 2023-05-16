@@ -77,29 +77,29 @@ module.exports = {
           }
         });
 
-        console.log('entradas', entradas);
+        console.log('entradas', entradas.data);
 
-        // entradas =  entradas.data
+        entradas =  entradas.data
 
         let linkEntradas = []
 
 
         
-        // for (let index = 0; index < context.result.productos.length; index++) {
-        //   const ticket = entradas[index];
-        //   console.log('ticket', ticket);
-        //   let idTicket = ticket._id;
-        //   let idNumero = index;
-        //   let link = `https://apiauramanager.alguientiene.com/descargar-entradas/${idTicket}`;
-        //   // let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
+        for (let index = 0; index < context.result.productos.length; index++) {
+          const ticket = entradas[index];
+          console.log('ticket', ticket);
+          let idTicket = ticket._id;
+          let idNumero = index;
+          let link = `https://apiauramanager.alguientiene.com/descargar-entradas/${idTicket}`;
+          // let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
 
-        //   linkEntradas.push({
-        //     link: link,
-        //     idTicket: idTicket,
-        //     idNumero: idNumero + 1
-        //   });
+          linkEntradas.push({
+            link: link,
+            idTicket: idTicket,
+            idNumero: idNumero + 1
+          });
           
-        // }
+        }
 
         // for (let i = 0; i < entradas.length; i++) {
 
