@@ -6,7 +6,7 @@ const mercadopago = require('mercadopago');
 axios = require('axios');
 mercadopago.configure({
   sandbox: true, // si estás probando en el ambiente de pruebas de MercadoPago
-  
+
   access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
 
 
@@ -144,7 +144,7 @@ module.exports = (options = {}) => {
       id_comprador: context.data.id_comprador,
       id_vendedor: 'no se sabe',
       type: 'premium',
-      productos: context.result.items,
+      productos: entradas,
       linkDePago: linkDePago.response.init_point,
       estado: 'pendiente',
       ticket_generado: false,
