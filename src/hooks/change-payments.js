@@ -4,10 +4,10 @@ const mercadopago = require('mercadopago');
 
 const axios = require('axios');
 mercadopago.configure({
-  sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
-  // access_token: 'APP_USR-2392316560626810-032101-51403a4ba528e4cb121e2d78218b8df1-1335371219'
+  sandbox: true, // si estás probando en el ambiente de pruebas de MercadoPago
+  access_token: 'APP_USR-2392316560626810-032101-51403a4ba528e4cb121e2d78218b8df1-1335371219'
   //produccion
-  access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
+  // access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
   // aquí debes colocar tu Client Secret
 });
 
@@ -125,13 +125,27 @@ module.exports = (options = {}) => {
                 estado: 'aprobado',
               });
               console.log('pago.ticket_generado', pago.ticket_generado);
-              let entrada = await context.app.service('entradas').create({
-                dni: null,
-                estado: 'no-ingreso',
-                consumicion: true,
-                paymentId: paymentId,
-                cantidad: pago.cantidadTickets
-              });
+              // let entrada = await context.app.service('entradas').create({
+              //   dni: null,
+              //   estado: 'no-ingreso',
+              //   consumicion: true,
+              //   paymentId: paymentId,
+              //   // cantidad: pago.cantidadTickets
+              // });
+              //un dependera de la cantidad de tickets que haya comprado el usuario
+              for (let index = 0; index < pago.cantidadTickets; index++) {
+                const element = pago.cantidadTickets[index];
+                console.log('element', element);
+                let entrada = await context.app.service('entradas').create({
+                  dni: null,
+                  estado: 'no-ingreso',
+                  consumicion: true,
+                  paymentId: paymentId,
+                // cantidad: pago.cantidadTickets
+                });
+              }
+            
+
 
               //editar el estado del pago a ticket generado true
               let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{

@@ -89,7 +89,8 @@ module.exports = {
           console.log('ticket', ticket);
           let idTicket = ticket._id;
           let idNumero = index;
-          let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
+          let link = `https://apiauramanager.alguientiene.com/descargar-entradas/${idTicket}`;
+          // let link = `http://192.168.1.8:5050/descargar-entradas/${idTicket}`;
 
           linkEntradas.push({
             link: link,
