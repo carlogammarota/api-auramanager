@@ -212,7 +212,7 @@ module.exports = (options = {}) => {
                         <p>Aqui tienes tu Ticket,</p>
                         <p>Descarga tus Tickets!</p>
                         Links: <br>
-                        <p>${linksHtml}</p>
+                        <p>test</p>
                       </body>
                     </html>
                   `
