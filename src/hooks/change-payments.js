@@ -215,7 +215,7 @@ module.exports = (options = {}) => {
                   to: pago.email,
                   subject: 'Tickets Aura - Valpisa',
                   // text: 'Contenido del correo electrónico',
-                  html: '<h1>Gracias por su compra</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                  html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
                 };
 
                 try {

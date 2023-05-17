@@ -1,6 +1,7 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 
 const generarEntrada = require('../../hooks/generar-entrada');
+const checkPermissions = require('feathers-permissions');
 
 module.exports = {
   before: {
@@ -9,7 +10,12 @@ module.exports = {
     get: [
 
     ],
-    create: [],
+    create: [
+      authenticate('jwt'),
+      checkPermissions({
+        roles: [ 'admin' ]
+      })
+    ],
     update: [],
     patch: [],
     remove: []

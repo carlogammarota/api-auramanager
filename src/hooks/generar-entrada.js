@@ -24,14 +24,14 @@ module.exports = (options = {}) => {
       const entrada = {
         name: '+',
         lastName: '1 Consumición',
-        address: '#Ticket',
+        address: '#Ticket Anticipada',
         addressNumber: 'Aura Productora',
         city: 'Valpisa Lab',
         zipCode: 'Capilla del Monte',
         phone: '5512345678'
       };
 
-      const skus = 'Viernes 19 de Mayo 2023';
+      const skus = 'Viernes 19 de Mayo 2023 00:00hs';
       //datos de la imagen del qr
       let datos = id_entrada;
     
