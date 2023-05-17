@@ -6,11 +6,11 @@ const mercadopago = require('mercadopago');
 
 const axios = require('axios');
 mercadopago.configure({
-  sandbox: true, // si estás probando en el ambiente de pruebas de MercadoPago
-  access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
+  sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
+  // access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
   
   //produccion
-  // access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
+  access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
   // aquí debes colocar tu Client Secret
 });
 
