@@ -16,9 +16,15 @@ module.exports = {
         roles: [ 'admin' ]
       })
     ],
-    update: [],
+    update: [
+     
+    ],
     patch: [],
-    remove: []
+    remove: [
+      checkPermissions({
+        roles: [ 'admin' ]
+      })
+    ]
   },
 
   after: {

@@ -23,8 +23,8 @@ module.exports = (options = {}) => {
       // id_entrada  = 
       const entrada = {
         name: '+',
-        lastName: '1 Consumición',
-        address: '#Ticket Anticipada',
+        lastName: 'Sin Consumición',
+        address: '#Ticket Puerta',
         addressNumber: 'Aura Productora',
         city: 'Valpisa Lab',
         zipCode: 'Capilla del Monte',
@@ -174,7 +174,7 @@ module.exports = (options = {}) => {
       // Add logo top right corner
       page.drawImage(imageSizeLogo, {
         x: 330,
-        y: -10,
+        y: 20,
         width: 180,
         height: 180,
       });
