@@ -11,10 +11,13 @@ mercadopago.configure({
   // access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
 
 
-  //produccion
-  access_token: 'APP_USR-114968102990097-051422-4304eafc70b7b7cda809677af7acd94a-94662750'
+  // //produccion
+  // access_token: 'APP_USR-114968102990097-051422-4304eafc70b7b7cda809677af7acd94a-94662750'
   
 
+
+    // para test
+    access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
   
   // aquí debes colocar tu Client Secret
 });
@@ -59,11 +62,11 @@ module.exports = (options = {}) => {
     for (let i = 0; i < cantidad; i++) {
       entradas.push({
         'id': i,
-        'title': 'Entrada',
-        'description': 'Se Realiza en Valpisa',
+        'title': 'Ticket Online',
+        'description': 'Se Realiza en Club Balumba',
         'quantity': 1,
         'currency_id': 'ARS',
-        'unit_price': 1000
+        'unit_price': 2000
       });
     }
 
@@ -115,14 +118,23 @@ module.exports = (options = {}) => {
         //este es para descargar la entrada de una
         // success: 'https://apiauramanager.alguientiene.com/descargar-entradas/' + external_reference_variable,
         //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
-        success: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable,
+        success: 'http://localhost:8080/gracias/' + external_reference_variable,
         pending: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable,
         failure: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable
       },
       auto_return: 'approved',
       external_reference: JSON.stringify(res._id),
       // notification_url: 'https://d004-170-51-93-104.sa.ngrok.io/mercadopago',
-      notification_url: 'https://apiauramanager.alguientiene.com/mercadopago',
+
+      //produccion
+      // notification_url: 'https://apiauramanager.alguientiene.com/mercadopago',
+
+
+      //local test
+      notification_url: 'https://1744-2800-810-59c-9041-543c-e48-158-dbb7.ngrok-free.app/mercadopago',
+
+
+
       // notification_url: 'https://api.alguientiene.com/mercadopago',
     };
 
@@ -154,6 +166,7 @@ module.exports = (options = {}) => {
       id_user: JSON.stringify(res._id),
       cantidadTickets: cantidad,
       email: email,
+      participantes: context.result.participantes,
 
       // id_orden: external_reference_variable      
     });

@@ -18,6 +18,7 @@ module.exports = function (app) {
     id_ticket: { type: String, required: false },
     cantidadTickets: { type: Number, required: false },
     email: { type: String, required: false },
+    participantes: { type: Array, required: false },
   }, {
     timestamps: true
   });

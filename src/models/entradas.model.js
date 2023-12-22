@@ -13,6 +13,8 @@ module.exports = function (app) {
     id_pago: { type: String, required: false },
     paymentId: { type: String, required: false },
     cantidad: { type: Number, required: false },
+    fullname: { type: String, required: false },
+    publica: { type: String, required: true },
 
 
   }, {

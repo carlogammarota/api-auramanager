@@ -15,182 +15,229 @@ module.exports = (options = {}) => {
     //convertir el id de objeto_id a string
 
     const id_entrada = JSON.stringify(context.result._id).replace(/"/g, '');
+    const fullname = context.result.fullname;
     console.log('Generar Entrada', id_entrada);
 
+    //generar viejo
+    // const generar = async (id_entrada) => {
+
+    //   // id_entrada  = 
+    //   const entrada = {
+    //     name: '+',
+    //     lastName: '1 Consumición',
+    //     address: '#Ticket Anticipada',
+    //     addressNumber: 'Aura Productora',
+    //     city: 'Valpisa Lab',
+    //     zipCode: 'Capilla del Monte',
+    //     phone: '5512345678'
+    //   };
+
+    //   const skus = 'Viernes 19 de Mayo 2023 00:00hs';
+    //   //datos de la imagen del qr
+    //   let datos = id_entrada;
     
-    const generar = async (id_entrada) => {
 
-      // id_entrada  = 
-      const entrada = {
-        name: '+',
-        lastName: '1 Consumición',
-        address: '#Ticket Anticipada',
-        addressNumber: 'Aura Productora',
-        city: 'Valpisa Lab',
-        zipCode: 'Capilla del Monte',
-        phone: '5512345678'
-      };
 
-      const skus = 'Viernes 19 de Mayo 2023 00:00hs';
-      //datos de la imagen del qr
-      let datos = id_entrada;
+    //   const imageBytes = await qr.toBuffer(datos, {
+    //     type: 'png',
+    //     errorCorrectionLevel: 'H',
+    //     margin: 1,
+    //     quality: 1,
+    //     width: 1000,
+    //     color: {
+    //       dark: '#000',
+    //       light: '#FFF'
+    //     }
+    //   });
+    //   const imageBytesLogo = fs.readFileSync('./logo.png');
+
+    //   // Crea un nuevo documento PDF
+    //   const pdfDoc = await PDFDocument.create();
+    //   const page = pdfDoc.addPage([500, 200]);
+
+
+    //   // Define la posición y el tamaño de la imagen
+    //   const imageSize = await pdfDoc.embedPng(imageBytes);
+    //   const imageWidth = imageSize.width / 2;
+    //   const imageHeight = imageSize.height / 2;
+
+    //   const imageSizeLogo = await pdfDoc.embedPng(imageBytesLogo);
+
+    //   // embed a Google font and set the font size
+    //   // const fontBytes = await fetch('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap')
+    //   //     .then(res => res.text())
+    //   //     .then(data => {
+    //   //         const match = data.match(/url\((.*?)\)/)[1];
+    //   //         return fetch(match).then(res => res.arrayBuffer());
+    //   //     });
+
+    //   // pdfDoc.registerFontkit(fontkit)
+
+    //   // const font = await pdfDoc.embedFont(fontBytes);
+
+
+
+
+
+
+    //   page.drawText(id_entrada, {
+    //     x: 210,
+    //     y: 150,
+    //     size: 15,
+    //     // font,
+    //     maxWidth: 220,
+    //     color: rgb(0, 0.1, 0.1),
+    //   });
+    //   page.drawText([entrada.name, entrada.lastName].join(' '), {
+    //     x: 210,
+    //     y: 60,
+    //     size: 15,
+    //     // font,
+    //     maxWidth: 220,
+    //     color: rgb(0, 0.1, 0.1),
+    //   });
+
+    //   page.drawText([entrada.address].join(', '), {
+    //     x: 210,
+    //     y: 170,
+    //     size: 20,
+    //     color: rgb(0, 0.1, 0.1),
+    //     // rotate: degrees(-45),
+    //   });
+    //   page.drawText([entrada.addressNumber].join(', '), {
+    //     x: 210,
+    //     y: 100,
+    //     size: 10,
+    //     color: rgb(0, 0.1, 0.1),
+    //     // rotate: degrees(-45),
+    //   });
+    //   page.drawText(entrada.city, {
+    //     x: 210,
+    //     y: 80,
+    //     size: 20,
+    //     color: rgb(0, 0.1, 0.1),
+    //     // rotate: degrees(-45),
+    //   });
+    //   page.drawText([entrada.phone.formatInternational].join(', '), {
+    //     x: 210,
+    //     y: 70,
+    //     size: 20,
+    //     color: rgb(0, 0.1, 0.1),
+    //     // rotate: degrees(-45),
+    //   });
+
+
+    //   page.drawRectangle({
+    //     x: 5,
+    //     y: 5,
+    //     width: 490,
+    //     height: 190,
+    //     borderColor: rgb(0, 0, 0),
+    //     borderWidth: 1,
+    //   });
+
+    //   page.drawLine({
+    //     start: { x: 195, y: 50 },
+    //     end: { x: 495, y: 50 },
+    //     thickness: 0.5,
+    //     color: rgb(0, 0, 0),
+    //     opacity: 1,
+    //   });
+
+
+
+    //   // Write SKUs
     
+    //   page.drawText(skus, {
+    //     x: 210,
+    //     y: 30,
+    //     size: 13,
+    //     color: rgb(0, 0.1, 0.1),
+    //     // rotate: degrees(-45),
+    //   });
 
 
-      const imageBytes = await qr.toBuffer(datos, {
-        type: 'png',
-        errorCorrectionLevel: 'H',
-        margin: 1,
-        quality: 1,
-        width: 1000,
-        color: {
-          dark: '#000',
-          light: '#FFF'
-        }
-      });
-      const imageBytesLogo = fs.readFileSync('./logo.png');
+    //   page.drawLine({
+    //     start: { x: 195, y: 5 },
+    //     end: { x: 195, y: 195 },
+    //     thickness: 1,
+    //     color: rgb(0, 0, 0),
+    //     opacity: 1,
+    //   });
 
-      // Crea un nuevo documento PDF
+    //   page.drawImage(imageSize, {
+    //     x: 10,
+    //     y: 10,
+    //     width: 180,
+    //     height: 180,
+    //   });
+
+    //   // Add logo top right corner
+    //   page.drawImage(imageSizeLogo, {
+    //     x: 330,
+    //     y: -10,
+    //     width: 180,
+    //     height: 180,
+    //   });
+
+    //   const pdfBytes = await pdfDoc.save();
+    //   return pdfBytes;
+
+
+    // };
+
+    const generar = async (id_entrada, fullname) => {
+      // Crear un nuevo documento PDF
       const pdfDoc = await PDFDocument.create();
-      const page = pdfDoc.addPage([500, 200]);
-
-
-      // Define la posición y el tamaño de la imagen
-      const imageSize = await pdfDoc.embedPng(imageBytes);
-      const imageWidth = imageSize.width / 2;
-      const imageHeight = imageSize.height / 2;
-
-      const imageSizeLogo = await pdfDoc.embedPng(imageBytesLogo);
-
-      // embed a Google font and set the font size
-      // const fontBytes = await fetch('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap')
-      //     .then(res => res.text())
-      //     .then(data => {
-      //         const match = data.match(/url\((.*?)\)/)[1];
-      //         return fetch(match).then(res => res.arrayBuffer());
-      //     });
-
-      // pdfDoc.registerFontkit(fontkit)
-
-      // const font = await pdfDoc.embedFont(fontBytes);
-
-
-
-
-
-
-      page.drawText(id_entrada, {
-        x: 210,
-        y: 150,
-        size: 15,
-        // font,
-        maxWidth: 220,
-        color: rgb(0, 0.1, 0.1),
-      });
-      page.drawText([entrada.name, entrada.lastName].join(' '), {
-        x: 210,
-        y: 60,
-        size: 15,
-        // font,
-        maxWidth: 220,
-        color: rgb(0, 0.1, 0.1),
-      });
-
-      page.drawText([entrada.address].join(', '), {
-        x: 210,
-        y: 170,
-        size: 20,
-        color: rgb(0, 0.1, 0.1),
-        // rotate: degrees(-45),
-      });
-      page.drawText([entrada.addressNumber].join(', '), {
-        x: 210,
-        y: 100,
-        size: 10,
-        color: rgb(0, 0.1, 0.1),
-        // rotate: degrees(-45),
-      });
-      page.drawText(entrada.city, {
-        x: 210,
-        y: 80,
-        size: 20,
-        color: rgb(0, 0.1, 0.1),
-        // rotate: degrees(-45),
-      });
-      page.drawText([entrada.phone.formatInternational].join(', '), {
-        x: 210,
-        y: 70,
-        size: 20,
-        color: rgb(0, 0.1, 0.1),
-        // rotate: degrees(-45),
-      });
-
-
-      page.drawRectangle({
-        x: 5,
-        y: 5,
-        width: 490,
-        height: 190,
-        borderColor: rgb(0, 0, 0),
-        borderWidth: 1,
-      });
-
-      page.drawLine({
-        start: { x: 195, y: 50 },
-        end: { x: 495, y: 50 },
-        thickness: 0.5,
-        color: rgb(0, 0, 0),
-        opacity: 1,
-      });
-
-
-
-      // Write SKUs
+      const page = pdfDoc.addPage([1452, 1879]);
     
-      page.drawText(skus, {
-        x: 210,
-        y: 30,
-        size: 13,
-        color: rgb(0, 0.1, 0.1),
-        // rotate: degrees(-45),
-      });
-
-
-      page.drawLine({
-        start: { x: 195, y: 5 },
-        end: { x: 195, y: 195 },
-        thickness: 1,
-        color: rgb(0, 0, 0),
-        opacity: 1,
-      });
-
+      // Agregar la imagen con dimensiones de 1900x1500
+      const imageBytes = fs.readFileSync("./tu_imagen.png"); // Reemplaza con la ruta de tu imagen
+      const imageSize = await pdfDoc.embedPng(imageBytes);
       page.drawImage(imageSize, {
-        x: 10,
-        y: 10,
-        width: 180,
-        height: 180,
+        x: 0,
+        y: 0,
+        width: 1452,
+        height: 1879,
       });
-
-      // Add logo top right corner
-      page.drawImage(imageSizeLogo, {
-        x: 330,
-        y: -10,
-        width: 180,
-        height: 180,
+    
+      // Agregar fullname
+      const fontSize = 400;
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      const nameText = fullname;
+      // const nameWidth = font.widthOfTextAtSize(nameText, fontSize);
+    
+      page.drawText(nameText, {
+        x: 65, // Centrar horizontalmente
+        y: 300, // Ajustar verticalmente según sea necesario
+        size: 50 ,
+        font: font,
+        color: rgb(1, 1, 1),
       });
-
+    
+      // Generar el código QR
+      const qrDataUrl = await qr.toDataURL(id_entrada);
+      const qrImageBytes = Buffer.from(qrDataUrl.split(",")[1], "base64");
+      const qrImageSize = await pdfDoc.embedPng(qrImageBytes);
+      page.drawImage(qrImageSize, {
+        x: 1000,
+        y: 275,
+        width: 400, // Ajusta según sea necesario
+        height: 400, // Ajusta según sea necesario
+      });
+    
       const pdfBytes = await pdfDoc.save();
       return pdfBytes;
-
-
     };
-
-
+    
     
 
-    // let id_entrada = id_entrada;
+  // const id_entrada = "6582738aa0fddca19d12af8b"; // Reemplaza con tu ID de entrada
+  
+  
+    
 
-    generar(id_entrada).then((data) => {
+    generar(id_entrada, fullname).then((data) => {
       fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
     }).catch((err) => {
       console.log(err);

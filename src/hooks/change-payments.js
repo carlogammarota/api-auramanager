@@ -10,8 +10,12 @@ mercadopago.configure({
   // access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
   
   //produccion
-  access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
+  // access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
   // aquí debes colocar tu Client Secret
+
+
+  // para test
+  access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
 });
 
 const nodemailer = require('nodemailer');
@@ -140,8 +144,15 @@ module.exports = (options = {}) => {
                 let entrada = await context.app.service('entradas').create({
                   dni: null,
                   estado: 'no-ingreso',
-                  consumicion: true,
+                  consumicion: false,
                   paymentId: pago._id,
+                  fullname: pago.participantes[index],
+                  publica: "sistema mercadopago"
+                //   "datos": {
+                //     "nombre": "Tony",
+                //     "apellido": "Guevara"
+                // },
+                // "publica": "sistema"
                 // cantidad: pago.cantidadTickets
                 });
               }
@@ -187,10 +198,11 @@ module.exports = (options = {}) => {
               //   const element = links[index];
               //   linksHtml += '<a href="'+element+'">Ticket '+index+'</a> <br>';
               // }
-              let link = 'https://auramanager.alguientiene.com/gracias/'+pago._id;
+              let link = 'http://localhost:5050/gracias/'+pago._id;
+              // let link = 'https://auramanager.alguientiene.com/gracias/'+pago._id;
 
               linksHtml += '<a href="'+link+'">Descargar Tickets </a> <br>';
-
+        // http://localhost:8080
 
 
 
@@ -213,7 +225,7 @@ module.exports = (options = {}) => {
                 const mailOptions = {
                   from: 'carlo.gammarota@gmail.com',
                   to: pago.email,
-                  subject: 'Tickets Aura - Valpisa',
+                  subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                   // text: 'Contenido del correo electrónico',
                   html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
                 };
@@ -239,7 +251,7 @@ module.exports = (options = {}) => {
               });
 
               // eslint-disable-next-line no-undef
-              console.log('entrada generada', entrada);
+              // console.log('entrada generada', entrada);
             }
 
             
