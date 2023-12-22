@@ -198,7 +198,8 @@ module.exports = (options = {}) => {
               //   const element = links[index];
               //   linksHtml += '<a href="'+element+'">Ticket '+index+'</a> <br>';
               // }
-              let link = 'http://localhost:5050/gracias/'+pago._id;
+              // let link = 'http://localhost:5050/gracias/'+pago._id;
+              let link = 'https://aura-producciones.com/gracias/'+pago._id;
               // let link = 'https://auramanager.alguientiene.com/gracias/'+pago._id;
 
               linksHtml += '<a href="'+link+'">Descargar Tickets </a> <br>';

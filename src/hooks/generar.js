@@ -112,15 +112,15 @@ module.exports = (options = {}) => {
       // },
       back_urls: {
         // success: 'https://alguientiene.com',
-        pending: 'https://alguientiene.com',
+        pending: 'https://aura-producciones.com/',
         // external_reference_variable
-        failure: 'https://alguientiene.com',
+        failure: 'https://aura-producciones.com/',
         //este es para descargar la entrada de una
         // success: 'https://apiauramanager.alguientiene.com/descargar-entradas/' + external_reference_variable,
         //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
-        success: 'http://localhost:8080/gracias/' + external_reference_variable,
-        pending: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable,
-        failure: 'https://auramanager.alguientiene.com/gracias/' + external_reference_variable
+        success: 'https://aura-producciones.com/gracias/' + external_reference_variable,
+        pending: 'https://aura-producciones.com/gracias/' + external_reference_variable,
+        failure: 'https://aura-producciones.com/gracias/' + external_reference_variable
       },
       auto_return: 'approved',
       external_reference: JSON.stringify(res._id),
@@ -131,7 +131,7 @@ module.exports = (options = {}) => {
 
 
       //local test
-      notification_url: 'https://1744-2800-810-59c-9041-543c-e48-158-dbb7.ngrok-free.app/mercadopago',
+      notification_url: 'https://api.aura-producciones.com/mercadopago',
 
 
 
