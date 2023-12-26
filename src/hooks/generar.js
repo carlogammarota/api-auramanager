@@ -116,7 +116,7 @@ module.exports = (options = {}) => {
         // external_reference_variable
         failure: 'https://aura-producciones.com/',
         //este es para descargar la entrada de una
-        // success: 'https://apiauramanager.alguientiene.com/descargar-entradas/' + external_reference_variable,
+        // success: 'https://api.aura-producciones.com/descargar-entradas/' + external_reference_variable,
         //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
         success: 'https://aura-producciones.com/gracias/' + external_reference_variable,
         pending: 'https://aura-producciones.com/gracias/' + external_reference_variable,
@@ -127,7 +127,7 @@ module.exports = (options = {}) => {
       // notification_url: 'https://d004-170-51-93-104.sa.ngrok.io/mercadopago',
 
       //produccion
-      // notification_url: 'https://apiauramanager.alguientiene.com/mercadopago',
+      // notification_url: 'https://api.aura-producciones.com/mercadopago',
 
 
       //local test
