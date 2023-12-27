@@ -8,7 +8,7 @@ const axios = require('axios');
 mercadopago.configure({
   sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
   // access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
-
+  
   //produccion
   // access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
   // aquí debes colocar tu Client Secret
@@ -62,10 +62,10 @@ module.exports = (options = {}) => {
       //   totalPadreCompra += item.unit_price;
       // }
 
-
-
+      
+      
       console.log('merchant_order', merchant_order);
-
+    
       let payments = merchant_order.response.payments;
 
       console.log('payments', payments.id);
@@ -75,9 +75,9 @@ module.exports = (options = {}) => {
 
       for (let index = 0; index < payments.length; index++) {
         const payment = payments[index];
-
+        
         // if(payment.status == 'approved' && payment.status_detail == 'accredited' && totalCompra == totalPadreCompra && merchant_order.response.status == 'closed' && merchant_order.response.payments[index].status == 'approved' && merchant_order.response.payments[index].status_detail == 'accredited' && merchant_order.response.external_reference == external_reference_variable){
-        if (payment.status == 'approved' && payment.status_detail == 'accredited') {
+        if(payment.status == 'approved' && payment.status_detail == 'accredited'){
           console.log('El pago fue exitoso, HOLAAA!!!');
 
 
@@ -96,15 +96,15 @@ module.exports = (options = {}) => {
           //aca es la logica de cuando la persona ya pago y todo salio bien
 
           //aca se debe descargar el pdf con la entrada
+          
 
-
-
+          
 
 
 
           // let cliente = await axios.get('https://api.mercadolibre.com/users/'+ merchant_order.response.payer.id);
 
-
+         
 
           // console.log(cliente.data);
 
@@ -128,15 +128,15 @@ module.exports = (options = {}) => {
           // if(pago.estado == !'aprobado'){
           // console.log('entroooooooooooooooooooooooooooooooo
           try {
-
+            
 
             let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
             console.log('aca va la logica', pago.ticket_generado);
-
+            
             //si el ticket no esta generado, se debe generar el ticket y guardarlo en la base de datos ticket true
-            if (pago.ticket_generado == false) {
+            if(pago.ticket_generado == false){
 
-              let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, ''), {
+              let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
                 estado: 'aprobado',
               });
               console.log('pago.ticket_generado', pago.ticket_generado);
@@ -151,12 +151,12 @@ module.exports = (options = {}) => {
                   paymentId: pago._id,
                   fullname: pago.participantes[index],
                   publica: "sistema mercadopago"
-                  //   "datos": {
-                  //     "nombre": "Tony",
-                  //     "apellido": "Guevara"
-                  // },
-                  // "publica": "sistema"
-                  // cantidad: pago.cantidadTickets
+                //   "datos": {
+                //     "nombre": "Tony",
+                //     "apellido": "Guevara"
+                // },
+                // "publica": "sistema"
+                // cantidad: pago.cantidadTickets
                 });
                 //guardar el id de la entrada en entradas
                 entradas.push(entrada._id);
@@ -168,7 +168,7 @@ module.exports = (options = {}) => {
 
               let linkEntradas = await context.app.service('link-entradas').get(pago._id);
 
-
+              
               //     "linkEntradas": [
               //         {
               //             "link": "https://api.aura-producciones.com/descargar-entradas/646325c5ef88831bf2e0b755",
@@ -204,11 +204,11 @@ module.exports = (options = {}) => {
               //   linksHtml += '<a href="'+element+'">Ticket '+index+'</a> <br>';
               // }
               // let link = 'http://localhost:5050/gracias/'+pago._id;
-              let link = 'https://aura-producciones.com/gracias/' + pago._id;
+              let link = 'https://aura-producciones.com/gracias/'+pago._id;
               // let link = 'https://auramanager.alguientiene.com/gracias/'+pago._id;
 
-              linksHtml += '<a href="' + link + '">Descargar Tickets </a> <br>';
-              // http://localhost:8080
+              linksHtml += '<a href="'+link+'">Descargar Tickets </a> <br>';
+        // http://localhost:8080
 
 
 
@@ -217,7 +217,16 @@ module.exports = (options = {}) => {
 
 
               async function enviarCorreo() {
-                // Configuración del transporte del correo electrónico
+                fs.readFile('./nuevo-email.html', 'utf8', (err, html) => {
+                  if (err) {
+                      console.error('Error leyendo el archivo HTML:', err);
+                      return;
+                  }
+          
+                  // Reemplaza los marcadores de posición en el HTML con datos reales
+                  let customizedHtml = html.replace(/{{XXXX-YYYY}}/g, "PROBANDO-INFO");
+          
+                     // Configuración del transporte del correo electrónico
                 const transporter = nodemailer.createTransport({
                   host: 'smtp-relay.sendinblue.com',
                   port: 587,
@@ -226,147 +235,214 @@ module.exports = (options = {}) => {
                     pass: 'wv5Xn140CbZDW9HR',
                   },
                 });
-
-                // Lee el archivo HTML
-                fs.readFile('./nuevo-mail.html', 'utf8', (err, html) => {
-                  if (err) {
-                    console.error('Error leyendo el archivo HTML:', err);
-                    return;
-                  }
-
-                  // Reemplaza los marcadores de posición en el HTML con datos reales
-                  let customizedHtml = html.replace(/{{XXXX-YYYY}}/g, "PROBANDO-REEMPLAZO");
-
+          
                   // Detalles del correo electrónico
-                  const mailOptions = {
-                    from: 'carlo.gammarota@gmail.com',
-                    to: pago.email,
-                    subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
-                    html: customizedHtml,
-                    attachments: [entradas].map(e => {
+                const mailOptions = {
+                  from: 'carlo.gammarota@gmail.com',
+                  to: pago.email,
+                  subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
+                  // text: 'Contenido del correo electrónico',
+                  // html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                  html:  customizedHtml,
+                  // attachments: [
+                  //   // {   // Adjunto de archivo en disco
+                  //   //   filename: 'nombrearchivo.txt',
+                  //   //   path: '/ruta/al/archivo/nombrearchivo.txt'
+                  //   // },
+                  //   // {   // Adjunto de archivo desde un URL
+                  //   //   filename: 'imagen.jpg',
+                  //   //   path: 'http://ejemplo.com/imagen.jpg'
+                  //   // },
+                  //   // {   // Adjunto de archivo en Buffer
+                  //   //   filename: 'texto_buffer.txt',
+                  //   //   content: new Buffer('Contenido del archivo en texto', 'utf-8')
+                  //   // },
+                  //   {   // Adjunto de archivo como un stream
+                  //     filename: 'texto_stream.txt',
+                  //     content: fs.createReadStream('/ruta/al/archivo/texto_stream.txt')
+                  //   }
+                  //   // Puedes agregar más archivos de la misma manera
+                  // ]
+                  attachments: [entradas].map(e => {
 
-                      return {
-                        filenamme: "ticket" + e + ".pdf",
-                        content: fs.createReadStream('./entradas/' + e + '.pdf')
-                      }
-
+                    return {
+                    filenamme: "ticket"+e+".pdf",
+                    content: fs.createReadStream('./entradas/'+e+'.pdf')
+                    }
+                    
                     })
-                  };
+                };
+            
+                    // Envía el correo
+                    transporter.sendMail(mailOptions, (error, info) => {
+                        if (error) {
+                            console.log('Error al enviar el correo:', error);
+                        } else {
+                            console.log('Correo enviado:', info.response);
+                        }
+                    });
+              });
+                // Configuración del transporte del correo electrónico
+                // const transporter = nodemailer.createTransport({
+                //   host: 'smtp-relay.sendinblue.com',
+                //   port: 587,
+                //   auth: {
+                //     user: 'carlo.gammarota@gmail.com',
+                //     pass: 'wv5Xn140CbZDW9HR',
+                //   },
+                // });
 
-                  try {
-                    // Envío del correo electrónico
-                    const info = await transporter.sendMail(mailOptions);
-                    console.log('Correo electrónico enviado:', info.response);
-                  } catch (error) {
-                    console.error('Error al enviar el correo electrónico:', error);
-                  }
-                }
+                // Detalles del correo electrónico
+                // const mailOptions = {
+                //   from: 'carlo.gammarota@gmail.com',
+                //   to: pago.email,
+                //   subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
+                //   // text: 'Contenido del correo electrónico',
+                //   // html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                //   html: 
+                //   // attachments: [
+                //   //   // {   // Adjunto de archivo en disco
+                //   //   //   filename: 'nombrearchivo.txt',
+                //   //   //   path: '/ruta/al/archivo/nombrearchivo.txt'
+                //   //   // },
+                //   //   // {   // Adjunto de archivo desde un URL
+                //   //   //   filename: 'imagen.jpg',
+                //   //   //   path: 'http://ejemplo.com/imagen.jpg'
+                //   //   // },
+                //   //   // {   // Adjunto de archivo en Buffer
+                //   //   //   filename: 'texto_buffer.txt',
+                //   //   //   content: new Buffer('Contenido del archivo en texto', 'utf-8')
+                //   //   // },
+                //   //   {   // Adjunto de archivo como un stream
+                //   //     filename: 'texto_stream.txt',
+                //   //     content: fs.createReadStream('/ruta/al/archivo/texto_stream.txt')
+                //   //   }
+                //   //   // Puedes agregar más archivos de la misma manera
+                //   // ]
+                //   attachments: [entradas].map(e => {
+
+                //     return {
+                //     filenamme: "ticket"+e+".pdf",
+                //     content: fs.createReadStream('./entradas/'+e+'.pdf')
+                //     }
+                    
+                //     })
+                // };
+
+                // try {
+                //   // Envío del correo electrónico
+                //   const info = await transporter.sendMail(mailOptions);
+                //   console.log('Correo electrónico enviado:', info.response);
+                // } catch (error) {
+                //   console.error('Error al enviar el correo electrónico:', error);
+                // }
+              }
 
               enviarCorreo();
 
 
 
-                //cierra el pago
-                //editar el estado del pago a ticket generado true
-                let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, ''), {
-                  ticket_generado: true,
-                  // id_ticket: entrada._id,
-                });
-
-                // eslint-disable-next-line no-undef
-                // console.log('entrada generada', entrada);
-              }
-
-
-
-
-
-              //hacer un if que pase una vez sola y no cada vez que se actualice el estado del pago solo si el estado es aprobado
-
-
-
-
-              //si el estado es aprobado, se debe crear una entrada para el usuario y guardarla en la base de datos
-
-              // let estadoPago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
-
-
-              //crear servicio generar entrada y que devuelva el id de la entrada
-              // let entrada = await context.app.service('entradas').create({
-              //   dni: null,
-              //   estado: 'no-ingreso',
-              //   consumision: true
-              // });
-
-              // console.log('entrada', entrada);
-
-
-
-
-
-              // let getPayment = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
-              // console.log('getPayment', getPayment.id_comprador);
-              // //hacer un patch a la api que actualize la cuenta a premium
-              // let premium = await context.app.service('users').patch( getPayment.id_comprador,{
-              //   premium: true
-              // });
-
-
-              // console.log('paymentNew', paymentNew);
-            } catch (error) {
-              console.log('error', error);
-            }
-          }
-        if (payment.status == 'rejected') {
-            console.log('El pago fue rechazado');
-
-            try {
-              let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, ''), {
-                estado: 'rechazado',
-                // id_orden: external_reference_variable
+              //cierra el pago
+              //editar el estado del pago a ticket generado true
+              let ticketGenerado = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
+                ticket_generado: true,
+                // id_ticket: entrada._id,
               });
-              // console.log('paymentNew', paymentNew);
-            } catch (error) {
-              console.log('error', error);
+
+              // eslint-disable-next-line no-undef
+              // console.log('entrada generada', entrada);
             }
+
+            
+
+        
+
+            //hacer un if que pase una vez sola y no cada vez que se actualice el estado del pago solo si el estado es aprobado
+            
+
+
+
+            //si el estado es aprobado, se debe crear una entrada para el usuario y guardarla en la base de datos
+
+            // let estadoPago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
+
+
+            //crear servicio generar entrada y que devuelva el id de la entrada
+            // let entrada = await context.app.service('entradas').create({
+            //   dni: null,
+            //   estado: 'no-ingreso',
+            //   consumision: true
+            // });
+
+            // console.log('entrada', entrada);
+
+            
+
+
+
+            // let getPayment = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
+            // console.log('getPayment', getPayment.id_comprador);
+            // //hacer un patch a la api que actualize la cuenta a premium
+            // let premium = await context.app.service('users').patch( getPayment.id_comprador,{
+            //   premium: true
+            // });
+
+
+            // console.log('paymentNew', paymentNew);
+          } catch (error) {
+            console.log('error', error);
           }
+        }
+        if(payment.status == 'rejected'  ){
+          console.log('El pago fue rechazado');
 
-
-
-          if (payment.status == 'pending') {
-            console.log('El pago esta pendiente');
-            try {
-              let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, ''), {
-                estado: 'pendiente',
-                // id_orden: external_reference_variable
-              });
-              // console.log('paymentNew', paymentNew);
-            } catch (error) {
-              console.log('error', error);
-            }
-          }
-          //in_process
-          if (payment.status == 'in_process') {
-            console.log('El pago esta en proceso');
-            try {
-              let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, ''), {
-                estado: 'en proceso',
-                // id_orden: external_reference_variable
-              });
-              console.log('paymentNew', paymentNew);
-            }
-            catch (error) {
-              console.log('error', error);
-            }
-
+          try {
+            let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
+              estado: 'rechazado',
+              // id_orden: external_reference_variable
+            });
+            // console.log('paymentNew', paymentNew);
+          } catch (error) {
+            console.log('error', error);
           }
         }
 
+
+
+        if(payment.status == 'pending' ){
+          console.log('El pago esta pendiente');
+          try {
+            let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
+              estado: 'pendiente',
+              // id_orden: external_reference_variable
+            });
+            // console.log('paymentNew', paymentNew);
+          } catch (error) {
+            console.log('error', error);
+          }
+        }
+        //in_process
+        if(payment.status == 'in_process' ){
+          console.log('El pago esta en proceso');
+          try {
+            let paymentNew = await context.app.service('payments').patch(merchant_order.response.external_reference.replace(/"/g, '') ,{
+              estado: 'en proceso',
+              // id_orden: external_reference_variable
+            });
+            console.log('paymentNew', paymentNew);
+          }
+          catch (error) {
+            console.log('error', error);
+          }
+
+        }
       }
 
+    }
 
 
+    
 
-      return context;
-    };
+    return context;
   };
+};
