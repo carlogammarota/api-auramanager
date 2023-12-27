@@ -19,6 +19,7 @@ module.exports = function (app) {
     cantidadTickets: { type: Number, required: false },
     email: { type: String, required: false },
     participantes: { type: Array, required: false },
+    orderId: { type: String, required: false },
   }, {
     timestamps: true
   });
