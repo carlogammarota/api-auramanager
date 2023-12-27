@@ -12,13 +12,16 @@ mercadopago.configure({
 
 
   // //produccion
-  // access_token: 'APP_USR-114968102990097-051422-4304eafc70b7b7cda809677af7acd94a-94662750'
+  access_token: 'APP_USR-114968102990097-051422-4304eafc70b7b7cda809677af7acd94a-94662750'
   
 
 
     // para test
-    access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
-  
+    // access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
+
+
+    //cuenta ro
+    // access_token: 'APP_USR-2354878281626192-122521-a41bf257a1dd84f3f5edc648a49d806a-1042694053'
   // aquí debes colocar tu Client Secret
 });
 
@@ -66,7 +69,7 @@ module.exports = (options = {}) => {
         'description': 'Se Realiza en Club Balumba',
         'quantity': 1,
         'currency_id': 'ARS',
-        'unit_price': 2000
+        'unit_price': 50
       });
     }
 
