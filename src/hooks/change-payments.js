@@ -266,7 +266,8 @@ module.exports = (options = {}) => {
                   attachments: [entradas].map(e => {
 
                     return {
-                    filenamme: "ticket"+e+".pdf",
+                    // filename: "ticket"+e+".pdf",
+                    filename: e+".pdf",
                     content: fs.createReadStream('./entradas/'+e+'.pdf')
                     }
                     
