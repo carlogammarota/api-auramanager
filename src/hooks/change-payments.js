@@ -240,8 +240,8 @@ module.exports = (options = {}) => {
                   to: pago.email,
                   subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                   // text: 'Contenido del correo electrónico',
-                  // html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
-                  html:  htmlstream,
+                  html: '<h1>Gracias PROBANDO por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                  // html:  htmlstream,
                   // attachments: [
                   //   // {   // Adjunto de archivo en disco
                   //   //   filename: 'nombrearchivo.txt',
@@ -261,15 +261,15 @@ module.exports = (options = {}) => {
                   //   }
                   //   // Puedes agregar más archivos de la misma manera
                   // ]
-                  attachments: [entradas].map(e => {
+                  // attachments: [entradas].map(e => {
 
-                    return {
-                    // filename: "ticket"+e+".pdf",
-                    filename: e+".pdf",
-                    content: fs.createReadStream('./entradas/'+e+'.pdf')
-                    }
+                  //   return {
+                  //   // filename: "ticket"+e+".pdf",
+                  //   filename: e+".pdf",
+                  //   content: fs.createReadStream('./entradas/'+e+'.pdf')
+                  //   }
                     
-                    })
+                  //   })
                 };
             
                     // Envía el correo
