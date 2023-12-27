@@ -306,11 +306,11 @@ module.exports = (options = {}) => {
 
 
                     // Construir la lista de adjuntos
-                    const attachments = entradas.map(id => ({
+                    const attachments = entradas.map(entrada => ({
                       // filename: `${id}.pdf`,
                       //poner nombre fullname del usuario
-                      filename: `${id.nombre}.pdf`,
-                      path: path.join('./entradas/', `${id}.pdf`)
+                      filename: `${entrada.nombre}.pdf`,
+                      path: path.join('./entradas/', `${entrada._id}.pdf`)
                     }));
 
             
