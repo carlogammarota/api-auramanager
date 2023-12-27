@@ -227,13 +227,19 @@ module.exports = (options = {}) => {
                   },
                 });
 
+                var htmlstream = fs.createReadStream('./nuevo-mail.html');
+                 // Reemplaza los marcadores de posición en el HTML con datos reales
+                let customizedHtml = htmlstream.replace(/{{XXXX-YYYY}}/g, "PROBANDO-TEST");
+
+
                 // Detalles del correo electrónico
                 const mailOptions = {
                   from: 'carlo.gammarota@gmail.com',
                   to: pago.email,
                   subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                   // text: 'Contenido del correo electrónico',
-                  html: '<h1>Gracias PROBANDO por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                  // html: '<h1>Gracias PROBANDO por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                  html: customizedHtml,
                   
                   // attachments: [
                   //   // {   // Adjunto de archivo en disco
