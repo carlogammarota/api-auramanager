@@ -69,7 +69,7 @@ module.exports = (options = {}) => {
         'description': 'Se Realiza en Club Balumba',
         'quantity': 1,
         'currency_id': 'ARS',
-        'unit_price': 0
+        'unit_price': 50
       });
     }
 
