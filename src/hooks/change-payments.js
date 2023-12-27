@@ -217,14 +217,9 @@ module.exports = (options = {}) => {
 
 
               async function enviarCorreo() {
-                fs.readFile('./nuevo-email.html', 'utf8', (err, html) => {
-                  if (err) {
-                      console.error('Error leyendo el archivo HTML:', err);
-                      return;
-                  }
+
           
-                  // Reemplaza los marcadores de posición en el HTML con datos reales
-                  let customizedHtml = html.replace(/{{XXXX-YYYY}}/g, "PROBANDO-INFO");
+                 
           
                      // Configuración del transporte del correo electrónico
                 const transporter = nodemailer.createTransport({
@@ -237,13 +232,16 @@ module.exports = (options = {}) => {
                 });
           
                   // Detalles del correo electrónico
+                  var htmlstream = fs.createReadStream('./nuevo-email.html');
+                   // Reemplaza los marcadores de posición en el HTML con datos reales
+                   htmlstream = html.replace(/{{XXXX-YYYY}}/g, "PROBANDO-INFO");
                 const mailOptions = {
                   from: 'carlo.gammarota@gmail.com',
                   to: pago.email,
                   subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                   // text: 'Contenido del correo electrónico',
                   // html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
-                  html:  customizedHtml,
+                  html:  htmlstream,
                   // attachments: [
                   //   // {   // Adjunto de archivo en disco
                   //   //   filename: 'nombrearchivo.txt',
@@ -282,7 +280,7 @@ module.exports = (options = {}) => {
                             console.log('Correo enviado:', info.response);
                         }
                     });
-              });
+
                 // Configuración del transporte del correo electrónico
                 // const transporter = nodemailer.createTransport({
                 //   host: 'smtp-relay.sendinblue.com',
