@@ -140,7 +140,7 @@ module.exports = (options = {}) => {
                 estado: 'aprobado',
               });
               console.log('pago.ticket_generado', pago.ticket_generado);
-
+              const entradas = [];
               for (let index = 0; index < pago.cantidadTickets; index++) {
                 const element = pago.cantidadTickets[index];
                 console.log('element', element);
@@ -158,6 +158,8 @@ module.exports = (options = {}) => {
                 // "publica": "sistema"
                 // cantidad: pago.cantidadTickets
                 });
+                //guardar el id de la entrada en entradas
+                entradas.push(entrada._id);
               }
 
 
@@ -225,13 +227,51 @@ module.exports = (options = {}) => {
                   },
                 });
 
+                 // Lee el archivo HTML
+    fs.readFile('./nuevo-mail.html', 'utf8', (err, html) => {
+      if (err) {
+          console.error('Error leyendo el archivo HTML:', err);
+          return;
+      }
+
+       // Reemplaza los marcadores de posición en el HTML con datos reales
+       let customizedHtml = html.replace(/{{XXXX-YYYY}}/g, "PROBANDO-REEMPLAZO");
+
                 // Detalles del correo electrónico
                 const mailOptions = {
                   from: 'carlo.gammarota@gmail.com',
                   to: pago.email,
                   subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                   // text: 'Contenido del correo electrónico',
-                  html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                  // html: '<h1>Gracias por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+                  html: customizedHtml,
+                  // attachments: [
+                  //   // {   // Adjunto de archivo en disco
+                  //   //   filename: 'nombrearchivo.txt',
+                  //   //   path: '/ruta/al/archivo/nombrearchivo.txt'
+                  //   // },
+                  //   // {   // Adjunto de archivo desde un URL
+                  //   //   filename: 'imagen.jpg',
+                  //   //   path: 'http://ejemplo.com/imagen.jpg'
+                  //   // },
+                  //   // {   // Adjunto de archivo en Buffer
+                  //   //   filename: 'texto_buffer.txt',
+                  //   //   content: new Buffer('Contenido del archivo en texto', 'utf-8')
+                  //   // },
+                  //   {   // Adjunto de archivo como un stream
+                  //     filename: 'texto_stream.txt',
+                  //     content: fs.createReadStream('/ruta/al/archivo/texto_stream.txt')
+                  //   }
+                  //   // Puedes agregar más archivos de la misma manera
+                  // ]
+                  attachments: [entradas].map(e => {
+
+                    return {
+                    filenamme: "ticket"+e+".pdf",
+                    content: fs.createReadStream('./entradas/'+e+'.pdf')
+                    }
+                    
+                    })
                 };
 
                 try {
