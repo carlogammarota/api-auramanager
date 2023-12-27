@@ -295,7 +295,7 @@ module.exports = (options = {}) => {
                     // Leer el archivo HTML como una cadena de texto
                     let htmlContent = await readFile('./nuevo-mail.html', 'utf8');
                     // Reemplaza los marcadores de posición en el HTML con datos reales
-                    let customizedHtml = htmlContent.replace(/{{XXXX-YYYY}}/g, linksHtml);
+                    let customizedHtml = htmlContent.replace(/{{XXXX-YYYY}}/g, "PROBANDO-TEST");
             
                     // Detalles del correo electrónico
                     const mailOptions = {
@@ -318,7 +318,7 @@ module.exports = (options = {}) => {
             // enviarCorreo(pago, "Link de Descarga");
             
 
-              enviarCorreo();
+              enviarCorreo(pago, linksHtml);
 
 
 
