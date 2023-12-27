@@ -128,6 +128,8 @@ module.exports = (options = {}) => {
           let pago = await context.app.service('payments').get(merchant_order.response.external_reference.replace(/"/g, ''));
           // console.log('estadoooooooooooooo', pago.estado);
 
+          console.log('PAGO PAGO', pago);
+
           // if(pago.estado == !'aprobado'){
           // console.log('entroooooooooooooooooooooooooooooooo
           try {
