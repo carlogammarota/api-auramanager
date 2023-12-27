@@ -296,6 +296,14 @@ module.exports = (options = {}) => {
                     let htmlContent = await readFile('./nuevo-mail.html', 'utf8');
                     // Reemplaza los marcadores de posición en el HTML con datos reales
                     let customizedHtml = htmlContent.replace(/{{linksHtml}}/g, "linksHtml");
+
+
+                    // Construir la lista de adjuntos
+                    const attachments = entradas.map(id => ({
+                      filename: `${id}.pdf`,
+                      path: path.join(__dirname, 'entradas', `${id}.pdf`)
+                    }));
+
             
                     // Detalles del correo electrónico
                     const mailOptions = {
@@ -303,15 +311,7 @@ module.exports = (options = {}) => {
                         to: pago.email,
                         subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                         html: customizedHtml,
-                        attachments: [
-                          entradas.map(e => {
-                            return {
-                              filenamme: "ticket"+e+".pdf",
-                              content: fs.createReadStream('./entradas/'+e+'.pdf')
-                            }
-                          }
-                          )
-                        ]
+                        attachments: attachments
                         
 
                         // Aquí puedes agregar tus archivos adjuntos si los necesitas
