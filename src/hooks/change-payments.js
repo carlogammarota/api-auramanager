@@ -303,6 +303,17 @@ module.exports = (options = {}) => {
                         to: pago.email,
                         subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                         html: customizedHtml,
+                        attachments: [
+                          map(entradas, e => {
+                            return {
+                              filenamme: "ticket"+e+".pdf",
+                              content: fs.createReadStream('./entradas/'+e+'.pdf')
+                            }
+                          }
+                          )
+                        ]
+                        
+
                         // Aquí puedes agregar tus archivos adjuntos si los necesitas
                     };
             
