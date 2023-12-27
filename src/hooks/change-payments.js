@@ -6,6 +6,7 @@ const mercadopago = require('mercadopago');
 const util = require('util');
 const axios = require('axios');
 const fs = require('fs');
+const path = require('path');
 mercadopago.configure({
   sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
   // access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
