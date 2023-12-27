@@ -3,7 +3,7 @@
 // Use this hook to manipulate incoming or outgoing data.
 // For more information on hooks see: http://docs.feathersjs.com/api/hooks.html
 const mercadopago = require('mercadopago');
-
+const util = require('util');
 const axios = require('axios');
 mercadopago.configure({
   sandbox: false, // si estás probando en el ambiente de pruebas de MercadoPago
@@ -23,6 +23,7 @@ mercadopago.configure({
 
 const nodemailer = require('nodemailer');
 // const axios = require('axios');
+const readFile = util.promisify(fs.readFile);
 const usersArray = [];
 
 
@@ -216,68 +217,105 @@ module.exports = (options = {}) => {
 
               
 
-              async function enviarCorreo() {
+              // async function enviarCorreo() {
+              //   // Configuración del transporte del correo electrónico
+              //   const transporter = nodemailer.createTransport({
+              //     host: 'smtp-relay.sendinblue.com',
+              //     port: 587,
+              //     auth: {
+              //       user: 'carlo.gammarota@gmail.com',
+              //       pass: 'wv5Xn140CbZDW9HR',
+              //     },
+              //   });
+
+              //   var htmlstream = fs.createReadStream('./nuevo-mail.html');
+              //    // Reemplaza los marcadores de posición en el HTML con datos reales
+              //   let customizedHtml = htmlstream.replace(/{{XXXX-YYYY}}/g, "PROBANDO-TEST");
+
+
+              //   // Detalles del correo electrónico
+              //   const mailOptions = {
+              //     from: 'carlo.gammarota@gmail.com',
+              //     to: pago.email,
+              //     subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
+              //     // text: 'Contenido del correo electrónico',
+              //     // html: '<h1>Gracias PROBANDO por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
+              //     html: customizedHtml,
+                  
+              //     // attachments: [
+              //     //   // {   // Adjunto de archivo en disco
+              //     //   //   filename: 'nombrearchivo.txt',
+              //     //   //   path: '/ruta/al/archivo/nombrearchivo.txt'
+              //     //   // },
+              //     //   // {   // Adjunto de archivo desde un URL
+              //     //   //   filename: 'imagen.jpg',
+              //     //   //   path: 'http://ejemplo.com/imagen.jpg'
+              //     //   // },
+              //     //   // {   // Adjunto de archivo en Buffer
+              //     //   //   filename: 'texto_buffer.txt',
+              //     //   //   content: new Buffer('Contenido del archivo en texto', 'utf-8')
+              //     //   // },
+              //     //   {   // Adjunto de archivo como un stream
+              //     //     filename: 'texto_stream.txt',
+              //     //     content: fs.createReadStream('/ruta/al/archivo/texto_stream.txt')
+              //     //   }
+              //     //   // Puedes agregar más archivos de la misma manera
+              //     // ]
+              //     // attachments: [entradas].map(e => {
+
+              //     //   return {
+              //     //   filenamme: "ticket"+e+".pdf",
+              //     //   content: fs.createReadStream('./entradas/'+e+'.pdf')
+              //     //   }
+                    
+              //     //   })
+              //   };
+
+              //   try {
+              //     // Envío del correo electrónico
+              //     const info = await transporter.sendMail(mailOptions);
+              //     console.log('Correo electrónico enviado:', info.response);
+              //   } catch (error) {
+              //     console.error('Error al enviar el correo electrónico:', error);
+              //   }
+              // }
+              async function enviarCorreo(pago, linksHtml) {
                 // Configuración del transporte del correo electrónico
                 const transporter = nodemailer.createTransport({
-                  host: 'smtp-relay.sendinblue.com',
-                  port: 587,
-                  auth: {
-                    user: 'carlo.gammarota@gmail.com',
-                    pass: 'wv5Xn140CbZDW9HR',
-                  },
+                    host: 'smtp-relay.sendinblue.com',
+                    port: 587,
+                    auth: {
+                        user: 'carlo.gammarota@gmail.com',
+                        pass: 'wv5Xn140CbZDW9HR', // Considera usar variables de entorno para manejar las credenciales de forma segura
+                    },
                 });
-
-                var htmlstream = fs.createReadStream('./nuevo-mail.html');
-                 // Reemplaza los marcadores de posición en el HTML con datos reales
-                let customizedHtml = htmlstream.replace(/{{XXXX-YYYY}}/g, "PROBANDO-TEST");
-
-
-                // Detalles del correo electrónico
-                const mailOptions = {
-                  from: 'carlo.gammarota@gmail.com',
-                  to: pago.email,
-                  subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
-                  // text: 'Contenido del correo electrónico',
-                  // html: '<h1>Gracias PROBANDO por su compra de Tickets</h1> <br> <h2>a continuación un link donde podras descargar tus Tickets</h2> <br> <h1>'+linksHtml+'</h1>',
-                  html: customizedHtml,
-                  
-                  // attachments: [
-                  //   // {   // Adjunto de archivo en disco
-                  //   //   filename: 'nombrearchivo.txt',
-                  //   //   path: '/ruta/al/archivo/nombrearchivo.txt'
-                  //   // },
-                  //   // {   // Adjunto de archivo desde un URL
-                  //   //   filename: 'imagen.jpg',
-                  //   //   path: 'http://ejemplo.com/imagen.jpg'
-                  //   // },
-                  //   // {   // Adjunto de archivo en Buffer
-                  //   //   filename: 'texto_buffer.txt',
-                  //   //   content: new Buffer('Contenido del archivo en texto', 'utf-8')
-                  //   // },
-                  //   {   // Adjunto de archivo como un stream
-                  //     filename: 'texto_stream.txt',
-                  //     content: fs.createReadStream('/ruta/al/archivo/texto_stream.txt')
-                  //   }
-                  //   // Puedes agregar más archivos de la misma manera
-                  // ]
-                  // attachments: [entradas].map(e => {
-
-                  //   return {
-                  //   filenamme: "ticket"+e+".pdf",
-                  //   content: fs.createReadStream('./entradas/'+e+'.pdf')
-                  //   }
-                    
-                  //   })
-                };
-
+            
                 try {
-                  // Envío del correo electrónico
-                  const info = await transporter.sendMail(mailOptions);
-                  console.log('Correo electrónico enviado:', info.response);
+                    // Leer el archivo HTML como una cadena de texto
+                    let htmlContent = await readFile('./nuevo-mail.html', 'utf8');
+                    // Reemplaza los marcadores de posición en el HTML con datos reales
+                    let customizedHtml = htmlContent.replace(/{{XXXX-YYYY}}/g, linksHtml);
+            
+                    // Detalles del correo electrónico
+                    const mailOptions = {
+                        from: 'carlo.gammarota@gmail.com',
+                        to: pago.email,
+                        subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
+                        html: customizedHtml,
+                        // Aquí puedes agregar tus archivos adjuntos si los necesitas
+                    };
+            
+                    // Envío del correo electrónico
+                    const info = await transporter.sendMail(mailOptions);
+                    console.log('Correo electrónico enviado:', info.response);
                 } catch (error) {
-                  console.error('Error al enviar el correo electrónico:', error);
+                    console.error('Error al enviar el correo electrónico:', error);
                 }
-              }
+            }
+            
+            // Ejemplo de llamada a la función (asegúrate de definir 'pago' y 'linksHtml')
+            // enviarCorreo(pago, "Link de Descarga");
+            
 
               enviarCorreo();
 
