@@ -1,5 +1,6 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
 const checkPermissions = require('feathers-permissions');
+const orderId = require("../../hooks/order-id");
 module.exports = {
   before: {
     all: [],
@@ -11,7 +12,8 @@ module.exports = {
       authenticate('jwt'),
       checkPermissions({
         roles: [ 'admin' ]
-      })
+      }),
+      orderId()
     ],
     update: [],
     patch: [
