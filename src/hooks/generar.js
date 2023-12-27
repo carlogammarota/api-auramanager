@@ -66,10 +66,10 @@ module.exports = (options = {}) => {
       entradas.push({
         'id': i,
         'title': 'Ticket Online',
-        'description': 'Se Realiza en Club Balumba',
+        'description': 'Tickets Aura Club Balumba',
         'quantity': 1,
         'currency_id': 'ARS',
-        'unit_price': 50
+        'unit_price': 3000
       });
     }
 
