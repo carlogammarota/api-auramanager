@@ -304,7 +304,7 @@ module.exports = (options = {}) => {
                         subject: 'Tickets Aura - ABRACADABRA - CLUB BALUMBA',
                         html: customizedHtml,
                         attachments: [
-                          map(entradas, e => {
+                          entradas.map(e => {
                             return {
                               filenamme: "ticket"+e+".pdf",
                               content: fs.createReadStream('./entradas/'+e+'.pdf')
