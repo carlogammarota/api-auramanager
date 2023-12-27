@@ -164,7 +164,11 @@ module.exports = (options = {}) => {
                 // cantidad: pago.cantidadTickets
                 });
                 //guardar el id de la entrada en entradas
-                entradas.push(entrada._id);
+                entradas.push({
+                  _id: entrada._id,
+                  nombre: entrada.fullname
+
+                });
               }
 
 
@@ -303,7 +307,9 @@ module.exports = (options = {}) => {
 
                     // Construir la lista de adjuntos
                     const attachments = entradas.map(id => ({
-                      filename: `${id}.pdf`,
+                      // filename: `${id}.pdf`,
+                      //poner nombre fullname del usuario
+                      filename: `${id.nombre}.pdf`,
                       path: path.join('./entradas/', `${id}.pdf`)
                     }));
 
