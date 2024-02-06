@@ -8,6 +8,7 @@ const linkEntradas = require('./link-entradas/link-entradas.service.js');
 const ventas = require('./ventas/ventas.service.js');
 const ventasAll = require('./ventas-all/ventas-all.service.js');
 const totales = require('./totales/totales.service.js');
+const eventos = require('./eventos/eventos.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(users);
@@ -20,4 +21,5 @@ module.exports = function (app) {
   app.configure(ventas);
   app.configure(ventasAll);
   app.configure(totales);
+  app.configure(eventos);
 };
