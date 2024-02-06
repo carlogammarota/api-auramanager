@@ -15,6 +15,7 @@ module.exports = function (app) {
     apellido: { type: String },
     finanzas: { type: Object },
     imagenFondo: { type: String },
+    desarrollo: { type: Boolean },
   
   
   }, {
