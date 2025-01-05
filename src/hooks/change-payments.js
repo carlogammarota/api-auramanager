@@ -180,17 +180,17 @@ module.exports = (options = {}) => {
               
               //     "linkEntradas": [
               //         {
-              //             "link": "https://api.aura-producciones.com/descargar-entradas/646325c5ef88831bf2e0b755",
+              //             "link": "http://localhost:1020/descargar-entradas/646325c5ef88831bf2e0b755",
               //             "idTicket": "646325c5ef88831bf2e0b755",
               //             "idNumero": 1
               //         },
               //         {
-              //             "link": "https://api.aura-producciones.com/descargar-entradas/646325c5ef88831bf2e0b757",
+              //             "link": "http://localhost:1020/descargar-entradas/646325c5ef88831bf2e0b757",
               //             "idTicket": "646325c5ef88831bf2e0b757",
               //             "idNumero": 2
               //         },
               //         {
-              //             "link": "https://api.aura-producciones.com/descargar-entradas/646325c8ef88831bf2e0b759",
+              //             "link": "http://localhost:1020/descargar-entradas/646325c8ef88831bf2e0b759",
               //             "idTicket": "646325c8ef88831bf2e0b759",
               //             "idNumero": 3
               //         }
