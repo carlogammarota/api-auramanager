@@ -19,7 +19,7 @@ module.exports = (options = {}) => {
     console.log('Generar Entrada', id_entrada);
 
     // generar viejo
-    const generar = async (id_entrada) => {
+    const generarModelo1 = async (id_entrada) => {
 
       // id_entrada  = 
       const entrada = {
@@ -229,7 +229,50 @@ module.exports = (options = {}) => {
       const pdfBytes = await pdfDoc.save();
       return pdfBytes;
     };
+
+    const aztec_1 = async (id_entrada, fullname) => {
+      // Crear un nuevo documento PDF
+      const pdfDoc = await PDFDocument.create();
+      const page = pdfDoc.addPage([1452, 1879]);
     
+      // Agregar la imagen con dimensiones de 1900x1500
+      const imageBytes = fs.readFileSync("./tu_imagen.png"); // Reemplaza con la ruta de tu imagen
+      const imageSize = await pdfDoc.embedPng(imageBytes);
+      page.drawImage(imageSize, {
+        x: 0,
+        y: 0,
+        width: 1452,
+        height: 1879,
+      });
+    
+      // Agregar fullname
+      const fontSize = 400;
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      const nameText = fullname;
+      // const nameWidth = font.widthOfTextAtSize(nameText, fontSize);
+    
+      page.drawText(nameText, {
+        x: 65, // Centrar horizontalmente
+        y: 300, // Ajustar verticalmente según sea necesario
+        size: 50 ,
+        font: font,
+        color: rgb(1, 1, 1),
+      });
+    
+      // Generar el código QR
+      const qrDataUrl = await qr.toDataURL(id_entrada);
+      const qrImageBytes = Buffer.from(qrDataUrl.split(",")[1], "base64");
+      const qrImageSize = await pdfDoc.embedPng(qrImageBytes);
+      page.drawImage(qrImageSize, {
+        x: 1000,
+        y: 275,
+        width: 400, // Ajusta según sea necesario
+        height: 400, // Ajusta según sea necesario
+      });
+    
+      const pdfBytes = await pdfDoc.save();
+      return pdfBytes;
+    };
     
 
   // const id_entrada = "6582738aa0fddca19d12af8b"; // Reemplaza con tu ID de entrada
@@ -237,7 +280,7 @@ module.exports = (options = {}) => {
   
     
 
-    generar(id_entrada, fullname).then((data) => {
+  generarModelo1(id_entrada, fullname).then((data) => {
       fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
     }).catch((err) => {
       console.log(err);

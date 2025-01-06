@@ -155,7 +155,11 @@ module.exports = (options = {}) => {
                   consumicion: false,
                   paymentId: pago._id,
                   fullname: pago.participantes[index],
-                  publica: "sistema mercadopago"
+                  // publica: "sistema mercadopago",
+                  //si no hay pago.publica, poner sistema
+                  publica: pago.publica ? pago.publica : "sin publica",
+                  url: 'http://192.168.1.16:3322/entradas/'+pago._id,
+
                 //   "datos": {
                 //     "nombre": "Tony",
                 //     "apellido": "Guevara"

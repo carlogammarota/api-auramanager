@@ -20,6 +20,7 @@ module.exports = function (app) {
     email: { type: String, required: false },
     participantes: { type: Array, required: false },
     orderId: { type: String, required: false },
+    publica: { type: String, required: false },
   }, {
     timestamps: true
   });

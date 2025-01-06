@@ -15,6 +15,7 @@ module.exports = function (app) {
     cantidad: { type: Number, required: false },
     fullname: { type: String, required: false },
     publica: { type: String, required: true },
+    url: { type: String, required: false },
 
 
   }, {

@@ -10,31 +10,33 @@ const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
-
 const middleware = require('./middleware');
 const services = require('./services');
 const appHooks = require('./app.hooks');
 const channels = require('./channels');
 
 const authentication = require('./authentication');
-
 const mongoose = require('./mongoose');
-
 const mongodb = require('./mongodb');
 
 const app = express(feathers());
 
 // Load app configuration
 app.configure(configuration());
-// Enable security, CORS, compression, favicon and body parsing
-app.use(helmet({
-  contentSecurityPolicy: false
-}));
+
+// Enable security, CORS, compression, favicon, and body parsing
+app.use(helmet({ contentSecurityPolicy: false }));
 app.use(cors());
 app.use(compress());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(favicon(path.join(app.get('public'), 'favicon.ico')));
+
+// **Ruta de archivos estáticos de entradas**
+// Asegúrate de que la ruta de acceso a la carpeta "entradas" sea correcta
+const entradasPath = path.join(__dirname, '../entradas'); // Ajusta esta ruta si es necesario
+app.use('/entradas_generadas', express.static(entradasPath));
+
 // Host the public folder
 app.use('/', express.static(app.get('public')));
 
@@ -42,19 +44,21 @@ app.use('/', express.static(app.get('public')));
 app.configure(express.rest());
 app.configure(socketio());
 
+// Configurar servicios y otras dependencias
 app.configure(mongoose);
-
 app.configure(mongodb);
 
-// Configure other middleware (see `middleware/index.js`)
+// Configura otros middleware (ver middleware/index.js)
 app.configure(middleware);
 app.configure(authentication);
-// Set up our services (see `services/index.js`)
+
+// Configura los servicios (ver services/index.js)
 app.configure(services);
-// Set up event channels (see channels.js)
+
+// Configura los canales de eventos (ver channels.js)
 app.configure(channels);
 
-// Configure a middleware for 404s and the error handler
+// Configura el middleware para 404s y el controlador de errores
 app.use(express.notFound());
 app.use(express.errorHandler({ logger }));
 

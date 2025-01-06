@@ -26,6 +26,9 @@ mercadopago.configure({
 });
 
 
+
+
+
 const express = require('express');
 const bodyParser = require('body-parser');
 
@@ -35,9 +38,12 @@ const app = express();
 app.use(bodyParser.json());
 
 
+const api_url = 'https://a498-181-99-7-57.ngrok-free.app';
+
 // eslint-disable-next-line no-unused-vars
 module.exports = (options = {}) => {
   return async context => {
+   
     // console.log('data', context.data);
     console.log('Generar pago', context.result);
 
@@ -46,6 +52,7 @@ module.exports = (options = {}) => {
       ticket_generado: false,
       cantidadTickets: context.result.cantidad,
       email: context.result.email,
+
     });
 
     // let id = JSON.stringify(res._id);
@@ -121,9 +128,12 @@ module.exports = (options = {}) => {
         //este es para descargar la entrada de una
         // success: 'http://localhost:1020/descargar-entradas/' + external_reference_variable,
         //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
-        success: 'https://aura-producciones.com/gracias/' + external_reference_variable,
-        pending: 'https://aura-producciones.com/gracias/' + external_reference_variable,
-        failure: 'https://aura-producciones.com/gracias/' + external_reference_variable
+        // success: 'https://aura-producciones.com/gracias/' + external_reference_variable,
+        success: api_url + '/descargar-entradas/' + external_reference_variable,
+        // pending: 'https://aura-producciones.com/gracias/' + external_reference_variable,
+        pending: api_url + '/gracias/' + external_reference_variable,
+        // failure: 'https://aura-producciones.com/gracias/' + external_reference_variable
+        failure: api_url + '/gracias/' + external_reference_variable
       },
       auto_return: 'approved',
       external_reference: JSON.stringify(res._id),
@@ -134,7 +144,8 @@ module.exports = (options = {}) => {
 
 
       //local test
-      notification_url: 'http://localhost:1020/mercadopago',
+      // notification_url: 'https://a498-181-99-7-57.ngrok-free.app/mercadopago',
+      notification_url: api_url + '/mercadopago',
 
 
 
@@ -170,6 +181,7 @@ module.exports = (options = {}) => {
       cantidadTickets: cantidad,
       email: email,
       participantes: context.result.participantes,
+      publica: context.result.publica,
 
       // id_orden: external_reference_variable      
     });

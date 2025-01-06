@@ -9,8 +9,17 @@ const ventas = require('./ventas/ventas.service.js');
 const ventasAll = require('./ventas-all/ventas-all.service.js');
 const totales = require('./totales/totales.service.js');
 const eventos = require('./eventos/eventos.service.js');
-// eslint-disable-next-line no-unused-vars
+
+// Necesitas una ruta para descargar las entradas generadas
+// Servir carpeta de entradas
+const path = require('path');
+const express = require('express');
+
+
 module.exports = function (app) {
+  // Configura todos los servicios que usas
+  // Ruta para servir archivos estáticos desde la carpeta 'entradas' en el directorio raíz
+
   app.configure(users);
   app.configure(entradas);
   app.configure(mercadopago);
@@ -22,4 +31,6 @@ module.exports = function (app) {
   app.configure(ventasAll);
   app.configure(totales);
   app.configure(eventos);
+
+
 };
