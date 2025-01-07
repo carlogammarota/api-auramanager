@@ -28,6 +28,6 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb+srv://admin-web:stuart@cluster0.podle1o.mongodb.net/aztec"
+  "mongodb": "mongodb+srv://admin-web:stuart@cluster0.podle1o.mongodb.net/auramanager"
 }
 
