@@ -16,11 +16,11 @@ mercadopago.configure({
   // aquí debes colocar tu Client Secret
 
 
-  // para test
-  // access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
+  // para test developer
+   access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
 
   //cuenta ro
-  access_token: 'APP_USR-2354878281626192-122521-a41bf257a1dd84f3f5edc648a49d806a-1042694053'
+  // access_token: 'APP_USR-2354878281626192-122521-a41bf257a1dd84f3f5edc648a49d806a-1042694053'
 });
 
 const nodemailer = require('nodemailer');
@@ -184,17 +184,17 @@ module.exports = (options = {}) => {
               
               //     "linkEntradas": [
               //         {
-              //             "link": "http://localhost:1020/descargar-entradas/646325c5ef88831bf2e0b755",
+              //             "link": "https://api.charlygproducciones.com/descargar-entradas/646325c5ef88831bf2e0b755",
               //             "idTicket": "646325c5ef88831bf2e0b755",
               //             "idNumero": 1
               //         },
               //         {
-              //             "link": "http://localhost:1020/descargar-entradas/646325c5ef88831bf2e0b757",
+              //             "link": "https://api.charlygproducciones.com/descargar-entradas/646325c5ef88831bf2e0b757",
               //             "idTicket": "646325c5ef88831bf2e0b757",
               //             "idNumero": 2
               //         },
               //         {
-              //             "link": "http://localhost:1020/descargar-entradas/646325c8ef88831bf2e0b759",
+              //             "link": "https://api.charlygproducciones.com/descargar-entradas/646325c8ef88831bf2e0b759",
               //             "idTicket": "646325c8ef88831bf2e0b759",
               //             "idNumero": 3
               //         }

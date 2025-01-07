@@ -18,7 +18,7 @@ module.exports = (options = {}) => {
     const fullname = context.result.fullname;
     console.log('Generar Entrada', id_entrada);
 
-    // generar viejo
+    // generar generarModelo1
     const generarModelo1 = async (id_entrada) => {
 
       // id_entrada  = 
@@ -186,49 +186,62 @@ module.exports = (options = {}) => {
 
     };
 
+    //aura
+
     const generarModelo2 = async (id_entrada, fullname) => {
-      // Crear un nuevo documento PDF
-      const pdfDoc = await PDFDocument.create();
-      const page = pdfDoc.addPage([1452, 1879]);
-    
-      // Agregar la imagen con dimensiones de 1900x1500
-      const imageBytes = fs.readFileSync("./tu_imagen.png"); // Reemplaza con la ruta de tu imagen
-      const imageSize = await pdfDoc.embedPng(imageBytes);
-      page.drawImage(imageSize, {
-        x: 0,
-        y: 0,
-        width: 1452,
-        height: 1879,
-      });
-    
-      // Agregar fullname
-      const fontSize = 400;
-      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
-      const nameText = fullname;
-      // const nameWidth = font.widthOfTextAtSize(nameText, fontSize);
-    
-      page.drawText(nameText, {
-        x: 65, // Centrar horizontalmente
-        y: 300, // Ajustar verticalmente según sea necesario
-        size: 50 ,
-        font: font,
-        color: rgb(1, 1, 1),
-      });
-    
-      // Generar el código QR
-      const qrDataUrl = await qr.toDataURL(id_entrada);
-      const qrImageBytes = Buffer.from(qrDataUrl.split(",")[1], "base64");
-      const qrImageSize = await pdfDoc.embedPng(qrImageBytes);
-      page.drawImage(qrImageSize, {
-        x: 1000,
-        y: 275,
-        width: 400, // Ajusta según sea necesario
-        height: 400, // Ajusta según sea necesario
-      });
-    
-      const pdfBytes = await pdfDoc.save();
-      return pdfBytes;
-    };
+      try {
+          // Crear un nuevo documento PDF
+          const pdfDoc = await PDFDocument.create();
+          const page = pdfDoc.addPage([1452, 1879]);
+  
+          // Agregar la imagen con dimensiones de 1900x1500
+          const imageBytes = fs.readFileSync("./flayer_aura.png"); // Reemplaza con la ruta de tu imagen
+          const imageSize = await pdfDoc.embedPng(imageBytes);
+          page.drawImage(imageSize, {
+              x: 0,
+              y: 0,
+              width: 1452,
+              height: 1879,
+          });
+  
+          // Agregar fullname
+          const fontSize = 50;
+          const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+          page.drawText(fullname, {
+              x: 550, // Centrar horizontalmente si es necesario
+              y: 180, // Ajustar verticalmente según sea necesario
+              size: fontSize,
+              font: font,
+              color: rgb(1, 1, 1),
+          });
+  
+          // Generar el código QR
+          const qrDataUrl = await qr.toDataURL(id_entrada);
+          const qrImageBytes = Buffer.from(qrDataUrl.split(",")[1], "base64");
+          const qrImageSize = await pdfDoc.embedPng(qrImageBytes);
+          page.drawImage(qrImageSize, {
+              x: 350,
+              y: 275,
+              scale: 0.2, // Ajusta según sea necesario
+              width: 800, // Ajusta según sea necesario
+              height: 800, // Ajusta según sea necesario
+          });
+  
+          // Guardar el PDF en bytes
+          const pdfBytes = await pdfDoc.save();
+          return pdfBytes;
+      } catch (error) {
+          console.error("Error generando el modelo:", error);
+          throw error;
+      }
+  };
+
+    generarModelo2(id_entrada, fullname).then((data) => {
+      fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
+    }).catch((err) => {
+      console.log(err);
+    }
+    );
 
     const aztec_1 = async (id_entrada, fullname) => {
       // Crear un nuevo documento PDF
@@ -280,19 +293,14 @@ module.exports = (options = {}) => {
   
     
 
-  generarModelo1(id_entrada, fullname).then((data) => {
-      fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
-    }).catch((err) => {
-      console.log(err);
-    }
-    );
+  // generarModelo1(id_entrada, fullname).then((data) => {
+  //     fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   }
+  //   );
 
-    generarModelo2(id_entrada, fullname).then((data) => {
-      fs.writeFileSync('./entradas/' + id_entrada + '.pdf', data);
-    }).catch((err) => {
-      console.log(err);
-    }
-    );
+
 
     // let entradas = ['645d47798688f7d0186cb5fa', '645d47d08688f7d0186cb609', '645d74db744bdfa7332e7f93', '645d74dc744bdfa7332e7f95', '645d74dd744bdfa7332e7f97'];
 

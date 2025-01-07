@@ -1,6 +1,6 @@
 {
   "host": "localhost",
-  "port": 1020,
+  "port": 5555,
   "public": "../public/",
   "paginate": {
     "default": 500,
@@ -28,5 +28,6 @@
       "passwordField": "password"
     }
   },
-  "mongodb": "mongodb+srv://admin-web:stuart@cluster0.podle1o.mongodb.net/auramanager"
+  "mongodb": "mongodb+srv://admin-web:stuart@cluster0.podle1o.mongodb.net/aztec"
 }
+

@@ -17,11 +17,11 @@ mercadopago.configure({
 
 
     // para test
-    // access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
+    access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
 
 
     //cuenta ro
-    access_token: 'APP_USR-2354878281626192-122521-a41bf257a1dd84f3f5edc648a49d806a-1042694053'
+    // access_token: 'APP_USR-2354878281626192-122521-a41bf257a1dd84f3f5edc648a49d806a-1042694053'
   // aquí debes colocar tu Client Secret
 });
 
@@ -38,7 +38,7 @@ const app = express();
 app.use(bodyParser.json());
 
 
-const api_url = 'https://a498-181-99-7-57.ngrok-free.app';
+const api_url = 'https://api.charlygproducciones.com/';
 
 // eslint-disable-next-line no-unused-vars
 module.exports = (options = {}) => {
@@ -126,26 +126,26 @@ module.exports = (options = {}) => {
         // external_reference_variable
         failure: 'https://aura-producciones.com/',
         //este es para descargar la entrada de una
-        // success: 'http://localhost:1020/descargar-entradas/' + external_reference_variable,
+        // success: 'https://api.charlygproducciones.com/descargar-entradas/' + external_reference_variable,
         //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
         // success: 'https://aura-producciones.com/gracias/' + external_reference_variable,
-        success: api_url + '/descargar-entradas/' + external_reference_variable,
+        success: api_url + 'gracias/' + external_reference_variable,
         // pending: 'https://aura-producciones.com/gracias/' + external_reference_variable,
-        pending: api_url + '/gracias/' + external_reference_variable,
+        pending: api_url + 'gracias/' + external_reference_variable,
         // failure: 'https://aura-producciones.com/gracias/' + external_reference_variable
-        failure: api_url + '/gracias/' + external_reference_variable
+        failure: api_url + 'gracias/' + external_reference_variable
       },
       auto_return: 'approved',
       external_reference: JSON.stringify(res._id),
       // notification_url: 'https://d004-170-51-93-104.sa.ngrok.io/mercadopago',
 
       //produccion
-      // notification_url: 'http://localhost:1020/mercadopago',
+      // notification_url: 'https://api.charlygproducciones.com/mercadopago',
 
 
       //local test
       // notification_url: 'https://a498-181-99-7-57.ngrok-free.app/mercadopago',
-      notification_url: api_url + '/mercadopago',
+      notification_url: api_url + 'mercadopago',
 
 
 
