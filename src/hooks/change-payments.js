@@ -16,6 +16,9 @@ mercadopago.configure({
   // aquí debes colocar tu Client Secret
 
 
+    // para aztec
+    // access_token: 'APP_USR-2624616694803107-010718-e136adb4a9e1816b72b3ef1800d66b58-135449682'
+
   // para test developer
    access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
 
@@ -158,7 +161,7 @@ module.exports = (options = {}) => {
                   // publica: "sistema mercadopago",
                   //si no hay pago.publica, poner sistema
                   publica: pago.publica ? pago.publica : "sin publica",
-                  url: 'http://192.168.1.16:3322/entradas/'+pago._id,
+                  // url: 'http://192.168.1.16:3322/entradas/'+pago._id,
 
                 //   "datos": {
                 //     "nombre": "Tony",
@@ -217,7 +220,8 @@ module.exports = (options = {}) => {
               //   linksHtml += '<a href="'+element+'">Ticket '+index+'</a> <br>';
               // }
               // let link = 'http://localhost:5050/gracias/'+pago._id;
-              let link = 'https://aura-producciones.com/gracias/'+pago._id;
+              let link = 'https://aztec.armortemplate.com/gracias/'+pago._id;
+              // let link = 'https://admin.aztecproduction.com/gracias/'+pago._id;
               // let link = 'https://auramanager.alguientiene.com/gracias/'+pago._id;
 
               linksHtml += '<a href="'+link+'">Descargar Tickets </a> <br>';

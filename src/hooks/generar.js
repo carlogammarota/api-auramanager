@@ -19,6 +19,9 @@ mercadopago.configure({
     // para test
     access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
 
+    // para aztec
+    // access_token: 'APP_USR-2624616694803107-010718-e136adb4a9e1816b72b3ef1800d66b58-135449682'
+
 
     //cuenta ro
     // access_token: 'APP_USR-2354878281626192-122521-a41bf257a1dd84f3f5edc648a49d806a-1042694053'
@@ -73,10 +76,10 @@ module.exports = (options = {}) => {
       entradas.push({
         'id': i,
         'title': 'Ticket Online',
-        'description': 'Tickets Aura Club Balumba',
+        'description': 'Tickets Aztec',
         'quantity': 1,
         'currency_id': 'ARS',
-        'unit_price': 3000
+        'unit_price': 8000
       });
     }
 
@@ -129,11 +132,11 @@ module.exports = (options = {}) => {
         // success: 'https://api.charlygproducciones.com/descargar-entradas/' + external_reference_variable,
         //este link retorna a la web gracias por su compra con la posibilidad de descargar las entrada
         // success: 'https://aura-producciones.com/gracias/' + external_reference_variable,
-        success: api_url + 'gracias/' + external_reference_variable,
+        success: "https://aztec.armortemplate.com" + '/gracias/' + external_reference_variable,
         // pending: 'https://aura-producciones.com/gracias/' + external_reference_variable,
-        pending: api_url + 'gracias/' + external_reference_variable,
+        pending: "https://aztec.armortemplate.com" + '/gracias/' + external_reference_variable,
         // failure: 'https://aura-producciones.com/gracias/' + external_reference_variable
-        failure: api_url + 'gracias/' + external_reference_variable
+        failure: "https://aztec.armortemplate.com" + '/gracias/' + external_reference_variable
       },
       auto_return: 'approved',
       external_reference: JSON.stringify(res._id),
@@ -145,7 +148,7 @@ module.exports = (options = {}) => {
 
       //local test
       // notification_url: 'https://a498-181-99-7-57.ngrok-free.app/mercadopago',
-      notification_url: api_url + 'mercadopago',
+      notification_url: 'https://api.charlygproducciones.com/mercadopago',
 
 
 
