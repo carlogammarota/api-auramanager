@@ -16,6 +16,21 @@ module.exports = function (app) {
     finanzas: { type: Object },
     imagenFondo: { type: String },
     desarrollo: { type: Boolean },
+    //  googleId: profile.id,
+    //           displayName: profile.displayName,
+    //           email: profile.email,
+    //           imagen: profile.picture,
+    //           requests: 200,
+    //           credits: 40,
+    //           name: profile.displayName,
+    //           verified: true,
+  
+    googleId: { type: String },
+    displayName: { type: String },
+    imagen: { type: String },
+    // requests: { type: Number },
+    // credits: { type: Number },
+    name: { type: String },
   
   
   }, {

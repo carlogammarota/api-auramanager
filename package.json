@@ -60,6 +60,8 @@
     "mongodb-core": "^3.2.7",
     "mongoose": "^6.3.6",
     "nodemailer": "^6.9.2",
+    "passport": "^0.7.0",
+    "passport-google-oauth2": "^0.2.0",
     "pdf-lib": "^1.17.1",
     "qrcode": "^1.5.3",
     "serve-favicon": "^2.5.0",

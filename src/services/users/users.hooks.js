@@ -34,8 +34,8 @@ const isOwner = async (context) => {
 module.exports = {
   before: {
     all: [],
-    find: [ authenticate('jwt') ],
-    get: [ authenticate('jwt') ],
+    // find: [ authenticate('jwt') ],
+    // get: [ authenticate('jwt') ],
     create: [ hashPassword('password') ],
     update: [ hashPassword('password'),  authenticate('jwt'), isOwner ],
     patch: [ hashPassword('password'),  authenticate('jwt'), isOwner ],
