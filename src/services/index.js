@@ -16,6 +16,15 @@ const path = require('path');
 const express = require('express');
 
 
+const publicas = require('./publicas/publicas.service.js');
+
+
+const inversores = require('./inversores/inversores.service.js');
+
+
+const patrocinadores = require('./patrocinadores/patrocinadores.service.js');
+
+
 module.exports = function (app) {
   // Configura todos los servicios que usas
   // Ruta para servir archivos estáticos desde la carpeta 'entradas' en el directorio raíz
@@ -33,4 +42,7 @@ module.exports = function (app) {
   app.configure(eventos);
 
 
+  app.configure(publicas);
+  app.configure(inversores);
+  app.configure(patrocinadores);
 };
