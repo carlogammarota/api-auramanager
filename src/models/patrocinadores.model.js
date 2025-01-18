@@ -8,7 +8,7 @@ module.exports = function (app) {
   const { Schema } = mongooseClient;
   const schema = new Schema({
     // text: { type: String, required: true }
-    usuario: { type: String, required: true },
+    usuario: { type: Object, required: true },
     monto : { type: Number, required: true },
     fecha: { type: Date, required: true },
   }, {

@@ -12,12 +12,12 @@ mercadopago.configure({
   // access_token: 'APP_USR-8509403097579740-051601-e1c674ca876a173dd84e3b63a2ac3d6e-1375519379'
   
   //produccion
-  access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
+//   access_token: 'APP_USR-3967596500928054-020703-58d66af4da4675b3a2c2c5ed3d5ca6d2-94662750'
   // aquí debes colocar tu Client Secret
 
 
-  // para test developer
-  //  access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
+  // para test 
+    access_token: 'APP_USR-5050283024010521-080117-1be3cde8e474088c42201a3722be9673-1304411976'
 
   //cuenta ro
   // access_token: 'APP_USR-2354878281626192-122521-a41bf257a1dd84f3f5edc648a49d806a-1042694053'
@@ -111,7 +111,7 @@ module.exports = (options = {}) => {
                     // id_orden: external_reference_variable
                 });
                 await context.app.service('patrocinadores').create({
-                    usuario: pago.id_comprador,
+                    usuario: pago.patrocinador,
                     monto: pago.monto,
                     fecha: new Date()
                 });
