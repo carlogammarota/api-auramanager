@@ -25,6 +25,12 @@ const inversores = require('./inversores/inversores.service.js');
 const patrocinadores = require('./patrocinadores/patrocinadores.service.js');
 
 
+const webhookPatrocinar = require('./webhook-patrocinar/webhook-patrocinar.service.js');
+
+
+const generarLinkPatrocinar = require('./generar-link-patrocinar/generar-link-patrocinar.service.js');
+
+
 module.exports = function (app) {
   // Configura todos los servicios que usas
   // Ruta para servir archivos estáticos desde la carpeta 'entradas' en el directorio raíz
@@ -45,4 +51,6 @@ module.exports = function (app) {
   app.configure(publicas);
   app.configure(inversores);
   app.configure(patrocinadores);
+  app.configure(webhookPatrocinar);
+  app.configure(generarLinkPatrocinar);
 };

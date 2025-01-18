@@ -21,6 +21,10 @@ module.exports = function (app) {
     participantes: { type: Array, required: false },
     orderId: { type: String, required: false },
     publica: { type: String, required: false },
+    tipo: { type: String, required: false },
+    patrocinador: { type: Object, required: false },
+    monto: { type: Number, required: false },
+
   }, {
     timestamps: true
   });

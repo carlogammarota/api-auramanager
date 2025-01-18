@@ -1,12 +1,13 @@
 const { authenticate } = require('@feathersjs/authentication').hooks;
-
-
+const patrocinar = require('../../hooks/patrocinar');
 module.exports = {
   before: {
     all: [ authenticate('jwt') ],
     find: [],
     get: [],
-    create: [],
+    create: [
+      
+    ],
     update: [],
     patch: [],
     remove: []
@@ -16,7 +17,9 @@ module.exports = {
     all: [],
     find: [],
     get: [],
-    create: [],
+    create: [
+      patrocinar()
+    ],
     update: [],
     patch: [],
     remove: []

@@ -1,12 +1,11 @@
-const { authenticate } = require('@feathersjs/authentication').hooks;
 
-
+const confirmarPatrocinio = require('../../hooks/confirmarPatrocinio');
 module.exports = {
   before: {
-    all: [ authenticate('jwt') ],
+    all: [],
     find: [],
     get: [],
-    create: [],
+    create: [confirmarPatrocinio()],
     update: [],
     patch: [],
     remove: []
