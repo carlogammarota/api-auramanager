@@ -74,7 +74,7 @@ module.exports = (options = {}) => {
         'description': 'Tickets Aura Club Balumba',
         'quantity': 1,
         'currency_id': 'ARS',
-        'unit_price': 3000
+        'unit_price': 4000
       });
     }
 
